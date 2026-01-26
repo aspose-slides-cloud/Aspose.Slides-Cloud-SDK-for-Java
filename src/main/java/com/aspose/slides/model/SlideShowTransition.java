@@ -917,6 +917,9 @@ public class SlideShowTransition {
   @SerializedName(value = "spokes", alternate = { "Spokes" })
   private Integer spokes;
 
+  @SerializedName(value = "duration", alternate = { "Duration" })
+  private Integer duration;
+
 
   public SlideShowTransition() {
     super();
@@ -1354,6 +1357,24 @@ public class SlideShowTransition {
     this.spokes = spokes;
   }
 
+  public SlideShowTransition duration(Integer duration) {
+    this.duration = duration;
+    return this;
+  }
+
+   /**
+   * The duration of the slide transition effect in milliseconds. If not set, the duration is determined automatically based on Speed and Type values.
+   * @return duration
+  **/
+  @ApiModelProperty(value = "The duration of the slide transition effect in milliseconds. If not set, the duration is determined automatically based on Speed and Type values.")
+  public Integer getDuration() {
+    return duration;
+  }
+
+  public void setDuration(Integer duration) {
+    this.duration = duration;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -1364,12 +1385,12 @@ public class SlideShowTransition {
       return false;
     }
     SlideShowTransition slideShowTransition = (SlideShowTransition) o;
-    return true && Objects.equals(this.type, slideShowTransition.type) && Objects.equals(this.advanceAfter, slideShowTransition.advanceAfter) && Objects.equals(this.advanceAfterTime, slideShowTransition.advanceAfterTime) && Objects.equals(this.advanceOnClick, slideShowTransition.advanceOnClick) && Objects.equals(this.soundIsBuiltIn, slideShowTransition.soundIsBuiltIn) && Objects.equals(this.soundLoop, slideShowTransition.soundLoop) && Objects.equals(this.soundMode, slideShowTransition.soundMode) && Objects.equals(this.soundName, slideShowTransition.soundName) && Objects.equals(this.speed, slideShowTransition.speed) && Objects.equals(this.cornerDirection, slideShowTransition.cornerDirection) && Objects.equals(this.eightDirection, slideShowTransition.eightDirection) && Objects.equals(this.inOutDirection, slideShowTransition.inOutDirection) && Objects.equals(this.hasBounce, slideShowTransition.hasBounce) && Objects.equals(this.sideDirection, slideShowTransition.sideDirection) && Objects.equals(this.pattern, slideShowTransition.pattern) && Objects.equals(this.leftRightDirection, slideShowTransition.leftRightDirection) && Objects.equals(this.morphType, slideShowTransition.morphType) && Objects.equals(this.fromBlack, slideShowTransition.fromBlack) && Objects.equals(this.orientationDirection, slideShowTransition.orientationDirection) && Objects.equals(this.throughBlack, slideShowTransition.throughBlack) && Objects.equals(this.cornerAndCenterDirection, slideShowTransition.cornerAndCenterDirection) && Objects.equals(this.shredPattern, slideShowTransition.shredPattern) && Objects.equals(this.orientation, slideShowTransition.orientation) && Objects.equals(this.spokes, slideShowTransition.spokes);
+    return true && Objects.equals(this.type, slideShowTransition.type) && Objects.equals(this.advanceAfter, slideShowTransition.advanceAfter) && Objects.equals(this.advanceAfterTime, slideShowTransition.advanceAfterTime) && Objects.equals(this.advanceOnClick, slideShowTransition.advanceOnClick) && Objects.equals(this.soundIsBuiltIn, slideShowTransition.soundIsBuiltIn) && Objects.equals(this.soundLoop, slideShowTransition.soundLoop) && Objects.equals(this.soundMode, slideShowTransition.soundMode) && Objects.equals(this.soundName, slideShowTransition.soundName) && Objects.equals(this.speed, slideShowTransition.speed) && Objects.equals(this.cornerDirection, slideShowTransition.cornerDirection) && Objects.equals(this.eightDirection, slideShowTransition.eightDirection) && Objects.equals(this.inOutDirection, slideShowTransition.inOutDirection) && Objects.equals(this.hasBounce, slideShowTransition.hasBounce) && Objects.equals(this.sideDirection, slideShowTransition.sideDirection) && Objects.equals(this.pattern, slideShowTransition.pattern) && Objects.equals(this.leftRightDirection, slideShowTransition.leftRightDirection) && Objects.equals(this.morphType, slideShowTransition.morphType) && Objects.equals(this.fromBlack, slideShowTransition.fromBlack) && Objects.equals(this.orientationDirection, slideShowTransition.orientationDirection) && Objects.equals(this.throughBlack, slideShowTransition.throughBlack) && Objects.equals(this.cornerAndCenterDirection, slideShowTransition.cornerAndCenterDirection) && Objects.equals(this.shredPattern, slideShowTransition.shredPattern) && Objects.equals(this.orientation, slideShowTransition.orientation) && Objects.equals(this.spokes, slideShowTransition.spokes) && Objects.equals(this.duration, slideShowTransition.duration);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, advanceAfter, advanceAfterTime, advanceOnClick, soundIsBuiltIn, soundLoop, soundMode, soundName, speed, cornerDirection, eightDirection, inOutDirection, hasBounce, sideDirection, pattern, leftRightDirection, morphType, fromBlack, orientationDirection, throughBlack, cornerAndCenterDirection, shredPattern, orientation, spokes);
+    return Objects.hash(type, advanceAfter, advanceAfterTime, advanceOnClick, soundIsBuiltIn, soundLoop, soundMode, soundName, speed, cornerDirection, eightDirection, inOutDirection, hasBounce, sideDirection, pattern, leftRightDirection, morphType, fromBlack, orientationDirection, throughBlack, cornerAndCenterDirection, shredPattern, orientation, spokes, duration);
   }
 
 
@@ -1402,6 +1423,7 @@ public class SlideShowTransition {
     sb.append("    shredPattern: ").append(toIndentedString(shredPattern)).append("\n");
     sb.append("    orientation: ").append(toIndentedString(orientation)).append("\n");
     sb.append("    spokes: ").append(toIndentedString(spokes)).append("\n");
+    sb.append("    duration: ").append(toIndentedString(duration)).append("\n");
     sb.append("}");
     return sb.toString();
   }

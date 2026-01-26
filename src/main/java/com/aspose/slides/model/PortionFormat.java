@@ -662,6 +662,9 @@ public class PortionFormat {
   @SerializedName(value = "complexScriptFont", alternate = { "ComplexScriptFont" })
   private String complexScriptFont;
 
+  @SerializedName(value = "spellCheck", alternate = { "SpellCheck" })
+  private Boolean spellCheck;
+
 
   public PortionFormat() {
     super();
@@ -1189,6 +1192,24 @@ public class PortionFormat {
     this.complexScriptFont = complexScriptFont;
   }
 
+  public PortionFormat spellCheck(Boolean spellCheck) {
+    this.spellCheck = spellCheck;
+    return this;
+  }
+
+   /**
+   * true to enable spell checking for the portion.
+   * @return spellCheck
+  **/
+  @ApiModelProperty(value = "true to enable spell checking for the portion.")
+  public Boolean isSpellCheck() {
+    return spellCheck;
+  }
+
+  public void setSpellCheck(Boolean spellCheck) {
+    this.spellCheck = spellCheck;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -1199,12 +1220,12 @@ public class PortionFormat {
       return false;
     }
     PortionFormat portionFormat = (PortionFormat) o;
-    return true && Objects.equals(this.fontBold, portionFormat.fontBold) && Objects.equals(this.fontItalic, portionFormat.fontItalic) && Objects.equals(this.fontUnderline, portionFormat.fontUnderline) && Objects.equals(this.strikethroughType, portionFormat.strikethroughType) && Objects.equals(this.textCapType, portionFormat.textCapType) && Objects.equals(this.escapement, portionFormat.escapement) && Objects.equals(this.spacing, portionFormat.spacing) && Objects.equals(this.fontColor, portionFormat.fontColor) && Objects.equals(this.highlightColor, portionFormat.highlightColor) && Objects.equals(this.fontHeight, portionFormat.fontHeight) && Objects.equals(this.normaliseHeight, portionFormat.normaliseHeight) && Objects.equals(this.proofDisabled, portionFormat.proofDisabled) && Objects.equals(this.smartTagClean, portionFormat.smartTagClean) && Objects.equals(this.kerningMinimalSize, portionFormat.kerningMinimalSize) && Objects.equals(this.kumimoji, portionFormat.kumimoji) && Objects.equals(this.languageId, portionFormat.languageId) && Objects.equals(this.alternativeLanguageId, portionFormat.alternativeLanguageId) && Objects.equals(this.isHardUnderlineFill, portionFormat.isHardUnderlineFill) && Objects.equals(this.isHardUnderlineLine, portionFormat.isHardUnderlineLine) && Objects.equals(this.fillFormat, portionFormat.fillFormat) && Objects.equals(this.effectFormat, portionFormat.effectFormat) && Objects.equals(this.lineFormat, portionFormat.lineFormat) && Objects.equals(this.underlineFillFormat, portionFormat.underlineFillFormat) && Objects.equals(this.underlineLineFormat, portionFormat.underlineLineFormat) && Objects.equals(this.hyperlinkClick, portionFormat.hyperlinkClick) && Objects.equals(this.hyperlinkMouseOver, portionFormat.hyperlinkMouseOver) && Objects.equals(this.latinFont, portionFormat.latinFont) && Objects.equals(this.eastAsianFont, portionFormat.eastAsianFont) && Objects.equals(this.complexScriptFont, portionFormat.complexScriptFont);
+    return true && Objects.equals(this.fontBold, portionFormat.fontBold) && Objects.equals(this.fontItalic, portionFormat.fontItalic) && Objects.equals(this.fontUnderline, portionFormat.fontUnderline) && Objects.equals(this.strikethroughType, portionFormat.strikethroughType) && Objects.equals(this.textCapType, portionFormat.textCapType) && Objects.equals(this.escapement, portionFormat.escapement) && Objects.equals(this.spacing, portionFormat.spacing) && Objects.equals(this.fontColor, portionFormat.fontColor) && Objects.equals(this.highlightColor, portionFormat.highlightColor) && Objects.equals(this.fontHeight, portionFormat.fontHeight) && Objects.equals(this.normaliseHeight, portionFormat.normaliseHeight) && Objects.equals(this.proofDisabled, portionFormat.proofDisabled) && Objects.equals(this.smartTagClean, portionFormat.smartTagClean) && Objects.equals(this.kerningMinimalSize, portionFormat.kerningMinimalSize) && Objects.equals(this.kumimoji, portionFormat.kumimoji) && Objects.equals(this.languageId, portionFormat.languageId) && Objects.equals(this.alternativeLanguageId, portionFormat.alternativeLanguageId) && Objects.equals(this.isHardUnderlineFill, portionFormat.isHardUnderlineFill) && Objects.equals(this.isHardUnderlineLine, portionFormat.isHardUnderlineLine) && Objects.equals(this.fillFormat, portionFormat.fillFormat) && Objects.equals(this.effectFormat, portionFormat.effectFormat) && Objects.equals(this.lineFormat, portionFormat.lineFormat) && Objects.equals(this.underlineFillFormat, portionFormat.underlineFillFormat) && Objects.equals(this.underlineLineFormat, portionFormat.underlineLineFormat) && Objects.equals(this.hyperlinkClick, portionFormat.hyperlinkClick) && Objects.equals(this.hyperlinkMouseOver, portionFormat.hyperlinkMouseOver) && Objects.equals(this.latinFont, portionFormat.latinFont) && Objects.equals(this.eastAsianFont, portionFormat.eastAsianFont) && Objects.equals(this.complexScriptFont, portionFormat.complexScriptFont) && Objects.equals(this.spellCheck, portionFormat.spellCheck);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fontBold, fontItalic, fontUnderline, strikethroughType, textCapType, escapement, spacing, fontColor, highlightColor, fontHeight, normaliseHeight, proofDisabled, smartTagClean, kerningMinimalSize, kumimoji, languageId, alternativeLanguageId, isHardUnderlineFill, isHardUnderlineLine, fillFormat, effectFormat, lineFormat, underlineFillFormat, underlineLineFormat, hyperlinkClick, hyperlinkMouseOver, latinFont, eastAsianFont, complexScriptFont);
+    return Objects.hash(fontBold, fontItalic, fontUnderline, strikethroughType, textCapType, escapement, spacing, fontColor, highlightColor, fontHeight, normaliseHeight, proofDisabled, smartTagClean, kerningMinimalSize, kumimoji, languageId, alternativeLanguageId, isHardUnderlineFill, isHardUnderlineLine, fillFormat, effectFormat, lineFormat, underlineFillFormat, underlineLineFormat, hyperlinkClick, hyperlinkMouseOver, latinFont, eastAsianFont, complexScriptFont, spellCheck);
   }
 
 
@@ -1242,6 +1263,7 @@ public class PortionFormat {
     sb.append("    latinFont: ").append(toIndentedString(latinFont)).append("\n");
     sb.append("    eastAsianFont: ").append(toIndentedString(eastAsianFont)).append("\n");
     sb.append("    complexScriptFont: ").append(toIndentedString(complexScriptFont)).append("\n");
+    sb.append("    spellCheck: ").append(toIndentedString(spellCheck)).append("\n");
     sb.append("}");
     return sb.toString();
   }

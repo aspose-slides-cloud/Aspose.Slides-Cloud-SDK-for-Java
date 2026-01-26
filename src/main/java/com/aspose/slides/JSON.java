@@ -137,6 +137,7 @@ public class JSON {
         registerType(com.aspose.slides.model.InputFile.class, com.aspose.slides.model.PathInputFile.class, "type", com.aspose.slides.model.InputFile.TypeEnum.PATH.getValue(), typeAdapters, valueMap);
         registerType(com.aspose.slides.model.OutputFile.class, com.aspose.slides.model.PathOutputFile.class, "type", com.aspose.slides.model.OutputFile.TypeEnum.PATH.getValue(), typeAdapters, valueMap);
         registerType(com.aspose.slides.model.FillFormat.class, com.aspose.slides.model.PatternFill.class, "type", com.aspose.slides.model.FillFormat.TypeEnum.PATTERN.getValue(), typeAdapters, valueMap);
+        registerType(com.aspose.slides.model.MathElement.class, com.aspose.slides.model.PhantomElement.class, "type", com.aspose.slides.model.MathElement.TypeEnum.PHANTOM.getValue(), typeAdapters, valueMap);
         registerType(com.aspose.slides.model.FillFormat.class, com.aspose.slides.model.PictureFill.class, "type", com.aspose.slides.model.FillFormat.TypeEnum.PICTURE.getValue(), typeAdapters, valueMap);
         registerType(com.aspose.slides.model.GeometryShape.class, com.aspose.slides.model.PictureFrame.class, "type", com.aspose.slides.model.GeometryShape.TypeEnum.PICTUREFRAME.getValue(), typeAdapters, valueMap);
         registerType(com.aspose.slides.model.PathSegment.class, com.aspose.slides.model.QuadraticBezierToPathSegment.class, "type", com.aspose.slides.model.PathSegment.TypeEnum.QUADBEZIERTO.getValue(), typeAdapters, valueMap);

@@ -86,7 +86,9 @@ public class MathElement {
     
     SUBSCRIPTELEMENT("SubscriptElement"),
     
-    SUPERSCRIPTELEMENT("SuperscriptElement");
+    SUPERSCRIPTELEMENT("SuperscriptElement"),
+    
+    PHANTOM("Phantom");
 
     private String value;
 
