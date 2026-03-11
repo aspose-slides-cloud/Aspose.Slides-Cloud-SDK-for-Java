@@ -6,12 +6,12 @@
   <packaging>jar</packaging>
   <name>aspose-slides-cloud</name>
   <version>26.1.0</version>
-  <url>https://github.com/aspose-slides-cloud/aspose-slides-cloud-java</url>
+  <url>https://github.com/aspose-slides-cloud/Aspose.Slides-Cloud-SDK-for-Java</url>
   <description>SDK for Aspose.Slides for Cloud</description>
   <scm>
-    <connection>scm:git:git@github.com:aspose-slides-cloud/aspose-slides-cloud-java</connection>
-    <developerConnection>scm:git:git@github.com:aspose-slides-cloud/aspose-slides-cloud-java</developerConnection>
-    <url>https://github.com/aspose-slides-cloud/aspose-slides-cloud-java</url>
+    <connection>scm:git:git@github.com:aspose-slides-cloud/Aspose.Slides-Cloud-SDK-for-Java</connection>
+    <developerConnection>scm:git:git@github.com:aspose-slides-cloud/Aspose.Slides-Cloud-SDK-for-Java</developerConnection>
+    <url>https://github.com/aspose-slides-cloud/Aspose.Slides-Cloud-SDK-for-Java</url>
   </scm>
   <prerequisites>
     <maven>2.2.0</maven>
