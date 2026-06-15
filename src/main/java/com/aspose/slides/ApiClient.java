@@ -84,6 +84,7 @@ public class ApiClient {
     private String version;
 
     private HttpLoggingInterceptor loggingInterceptor;
+    private HttpLoggingInterceptor.Logger logger;
 
     /*
      * Constructor for ApiClient
@@ -96,22 +97,24 @@ public class ApiClient {
             configuration.getTimeout(),
             configuration.getHttpRequestTimeout(),
             configuration.getAllowInsecureRequests(),
-            configuration.getCustomHeaders());
+            configuration.getCustomHeaders(),
+            configuration.getLogger());
     }
 
     /*
      * Constructor for ApiClient
      */
     public ApiClient(String baseUrl, Authentication authentication) {
-        this(baseUrl, authentication, false, 0, 300, false, null);
+        this(baseUrl, authentication, false, 0, 300, false, null, null);
     }
 
     /*
      * Constructor for ApiClient
      */
-    private ApiClient(String baseUrl, Authentication authentication, Boolean debugging, Integer timeout, Integer httpRequestTimeout, Boolean allowInsecureRequests, Map<String, String> customHeaders) {
+    private ApiClient(String baseUrl, Authentication authentication, Boolean debugging, Integer timeout, Integer httpRequestTimeout, Boolean allowInsecureRequests, Map<String, String> customHeaders, HttpLoggingInterceptor.Logger logger) {
         this.baseUrl = baseUrl;
         this.authentication = authentication;
+        this.logger = logger;
         httpClient = new OkHttpClient();
         List<Protocol> protocols = new ArrayList<Protocol>();
         protocols.add(Protocol.HTTP_1_1);
@@ -315,7 +318,9 @@ public class ApiClient {
     public ApiClient setDebugging(boolean debugging) {
         if (debugging != this.debugging) {
             if (debugging) {
-                loggingInterceptor = new HttpLoggingInterceptor();
+                loggingInterceptor = logger != null
+                    ? new HttpLoggingInterceptor(logger)
+                    : new HttpLoggingInterceptor();
                 loggingInterceptor.setLevel(Level.BODY);
                 httpClient.interceptors().add(loggingInterceptor);
             } else {

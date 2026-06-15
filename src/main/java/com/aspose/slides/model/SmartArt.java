@@ -32,6 +32,7 @@ import com.aspose.slides.model.EffectFormat;
 import com.aspose.slides.model.FillFormat;
 import com.aspose.slides.model.Hyperlink;
 import com.aspose.slides.model.LineFormat;
+import com.aspose.slides.model.ParagraphFormat;
 import com.aspose.slides.model.ResourceUri;
 import com.aspose.slides.model.ShapeBase;
 import com.aspose.slides.model.SmartArtNode;
@@ -575,6 +576,9 @@ public class SmartArt extends ShapeBase {
   @SerializedName(value = "isReversed", alternate = { "IsReversed" })
   private Boolean isReversed;
 
+  @SerializedName(value = "defaultParagraphFormat", alternate = { "DefaultParagraphFormat" })
+  private ParagraphFormat defaultParagraphFormat;
+
 
   public SmartArt() {
     super();
@@ -679,6 +683,24 @@ public class SmartArt extends ShapeBase {
     this.isReversed = isReversed;
   }
 
+  public SmartArt defaultParagraphFormat(ParagraphFormat defaultParagraphFormat) {
+    this.defaultParagraphFormat = defaultParagraphFormat;
+    return this;
+  }
+
+   /**
+   * Default paragraph format applied to all nodes. Write-only: not populated on read since there is no corresponding property at the SmartArt shape level in Aspose.Slides.
+   * @return defaultParagraphFormat
+  **/
+  @ApiModelProperty(value = "Default paragraph format applied to all nodes. Write-only: not populated on read since there is no corresponding property at the SmartArt shape level in Aspose.Slides.")
+  public ParagraphFormat getDefaultParagraphFormat() {
+    return defaultParagraphFormat;
+  }
+
+  public void setDefaultParagraphFormat(ParagraphFormat defaultParagraphFormat) {
+    this.defaultParagraphFormat = defaultParagraphFormat;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -689,12 +711,12 @@ public class SmartArt extends ShapeBase {
       return false;
     }
     SmartArt smartArt = (SmartArt) o;
-    return true && Objects.equals(this.layout, smartArt.layout) && Objects.equals(this.quickStyle, smartArt.quickStyle) && Objects.equals(this.colorStyle, smartArt.colorStyle) && Objects.equals(this.nodes, smartArt.nodes) && Objects.equals(this.isReversed, smartArt.isReversed) && super.equals(o);
+    return true && Objects.equals(this.layout, smartArt.layout) && Objects.equals(this.quickStyle, smartArt.quickStyle) && Objects.equals(this.colorStyle, smartArt.colorStyle) && Objects.equals(this.nodes, smartArt.nodes) && Objects.equals(this.isReversed, smartArt.isReversed) && Objects.equals(this.defaultParagraphFormat, smartArt.defaultParagraphFormat) && super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(layout, quickStyle, colorStyle, nodes, isReversed, super.hashCode());
+    return Objects.hash(layout, quickStyle, colorStyle, nodes, isReversed, defaultParagraphFormat, super.hashCode());
   }
 
 
@@ -708,6 +730,7 @@ public class SmartArt extends ShapeBase {
     sb.append("    colorStyle: ").append(toIndentedString(colorStyle)).append("\n");
     sb.append("    nodes: ").append(toIndentedString(nodes)).append("\n");
     sb.append("    isReversed: ").append(toIndentedString(isReversed)).append("\n");
+    sb.append("    defaultParagraphFormat: ").append(toIndentedString(defaultParagraphFormat)).append("\n");
     sb.append("}");
     return sb.toString();
   }

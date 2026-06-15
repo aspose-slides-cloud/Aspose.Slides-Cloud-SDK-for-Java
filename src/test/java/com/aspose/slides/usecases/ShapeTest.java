@@ -87,7 +87,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         Shape dto = new Shape();
         dto.setShapeType(GeometryShape.ShapeTypeEnum.CALLOUT1);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof Shape);
     }
 
@@ -104,7 +104,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create shape with no ShapeType specified
-            testSlidesApi.createShape(fileName, c_slideIndex, new Shape(), null, null, password, folderName, null, null);
+            testSlidesApi.createShape(fileName, c_slideIndex, new Shape(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -115,7 +115,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create a graphical object
-            testSlidesApi.createShape(fileName, c_slideIndex, new GraphicalObject(), null, null, password, folderName, null, null);
+            testSlidesApi.createShape(fileName, c_slideIndex, new GraphicalObject(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -128,7 +128,7 @@ public class ShapeTest extends ApiTest {
         PictureFill pictureFill = new PictureFill();
         pictureFill.setBase64Data("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXY5g+ffp/AAZTAsWGL27gAAAAAElFTkSuQmCC");
         dto.setPictureFillFormat(pictureFill);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof PictureFrame);
     }
 
@@ -137,7 +137,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create picture with no data specified
-            testSlidesApi.createShape(fileName, c_slideIndex, new PictureFrame(), null, null, password, folderName, null, null);
+            testSlidesApi.createShape(fileName, c_slideIndex, new PictureFrame(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -148,7 +148,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         AudioFrame dto = new AudioFrame();
         dto.setBase64Data("bXAzc2FtcGxl");
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof AudioFrame);
     }
 
@@ -157,7 +157,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create audio with no data specified
-            testSlidesApi.createShape(fileName, c_slideIndex, new AudioFrame(), null, null, password, folderName, null, null);
+            testSlidesApi.createShape(fileName, c_slideIndex, new AudioFrame(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -168,7 +168,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         VideoFrame dto = new VideoFrame();
         dto.setBase64Data("bXAzc2FtcGxl");
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof VideoFrame);
     }
 
@@ -177,7 +177,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create video with no data specified
-            testSlidesApi.createShape(fileName, c_slideIndex, new VideoFrame(), null, null, password, folderName, null, null);
+            testSlidesApi.createShape(fileName, c_slideIndex, new VideoFrame(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -188,7 +188,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create an OleObjectFrame
-            testSlidesApi.createShape(fileName, c_slideIndex, new OleObjectFrame(), null, null, password, folderName, null, null);
+            testSlidesApi.createShape(fileName, c_slideIndex, new OleObjectFrame(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -221,7 +221,7 @@ public class ShapeTest extends ApiTest {
         node2.setOrgChartLayout(SmartArtNode.OrgChartLayoutEnum.INITIAL);
         nodes.add(node2);
         dto.setNodes(nodes);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof SmartArt);
     }
 
@@ -253,7 +253,7 @@ public class ShapeTest extends ApiTest {
     @Test
     public void smartArtEmptyTest() throws ApiException, IOException {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new SmartArt(), null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new SmartArt(), null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof SmartArt);
     }
 
@@ -262,7 +262,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create a chart without series
-            ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new Chart(), null, null, password, folderName, null, null);
+            ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new Chart(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -367,7 +367,7 @@ public class ShapeTest extends ApiTest {
         column4.setWidth(100.0);
         columns.add(column4);
         dto.setColumns(columns);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof Table);
     }
 
@@ -376,7 +376,7 @@ public class ShapeTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         try {
             //Cannot create a table with no columns and rows
-            testSlidesApi.createShape(fileName, c_slideIndex, new Table(), null, null, password, folderName, null, null);
+            testSlidesApi.createShape(fileName, c_slideIndex, new Table(), null, null, null, password, folderName, null, null);
         } catch (Exception ex) {
             assertTrue(ex instanceof ApiException);
         }
@@ -385,7 +385,7 @@ public class ShapeTest extends ApiTest {
     @Test
     public void groupShapeEmptyTest() throws ApiException, IOException {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new GroupShape(), null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new GroupShape(), null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof GroupShape);
     }
 
@@ -400,14 +400,14 @@ public class ShapeTest extends ApiTest {
         ResourceUri endShape = new ResourceUri();
         endShape.setHref("https://api.aspose.cloud/v3.0/slides/myPresentation.pptx/slides/1/shapes/2");
         dto.setEndShapeConnectedTo(endShape);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof Connector);
     }
 
     @Test
     public void connectorEmptyTest() throws ApiException, IOException {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new Connector(), null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, new Connector(), null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof Connector);
     }
 
@@ -421,7 +421,7 @@ public class ShapeTest extends ApiTest {
         dto.setWidth(50.0);
         dto.setHeight(50.0);
 
-        ShapeBase response = testSlidesApi.createShape(fileName, 1, dto, null, null, password, folderName, null, "4");
+        ShapeBase response = testSlidesApi.createShape(fileName, 1, dto, null, null, null, password, folderName, null, "4");
         assertTrue(response instanceof Shape);
     }
 
@@ -620,7 +620,7 @@ public class ShapeTest extends ApiTest {
         dto.setHeight(100.0);
         dto.setTargetSlideIndex(2);
 
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof ZoomFrame);
         assertEquals(dto.getTargetSlideIndex(), ((ZoomFrame)shape).getTargetSlideIndex());
     }
@@ -635,7 +635,7 @@ public class ShapeTest extends ApiTest {
         dto.setHeight(100.0);
         dto.setTargetSectionIndex(2);
 
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof SectionZoomFrame);
         assertEquals(dto.getTargetSectionIndex(), ((SectionZoomFrame)shape).getTargetSectionIndex());
     }
@@ -651,7 +651,7 @@ public class ShapeTest extends ApiTest {
         dto.setLinkPath(c_oleObjectFileName);
         dto.embeddedFileExtension("xlsx");
 
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof OleObjectFrame);
         assertEquals(((OleObjectFrame)shape).getLinkPath(), dto.getLinkPath());
     }
@@ -671,7 +671,7 @@ public class ShapeTest extends ApiTest {
         dto.setEmbeddedFileBase64Data(base64Data);
         dto.embeddedFileExtension("xlsx");
 
-        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertTrue(shape instanceof OleObjectFrame);
         assertNotNull(((OleObjectFrame)shape).getEmbeddedFileBase64Data());
     }
@@ -684,7 +684,7 @@ public class ShapeTest extends ApiTest {
         assertEquals(0, shapes.getShapesLinks().size());
 
         GroupShape dto = new GroupShape();
-        testSlidesApi.createShape(fileName, slideIndex, dto, null, null, password, folderName, null, null);
+        testSlidesApi.createShape(fileName, slideIndex, dto, null, null, null, password, folderName, null, null);
 
         Shape shape1 = new Shape();
         shape1.setShapeType(GeometryShape.ShapeTypeEnum.RECTANGLE);
@@ -707,9 +707,9 @@ public class ShapeTest extends ApiTest {
         shape3.setWidth(50.0);
         shape3.setHeight(50.0);
 
-        testSlidesApi.createShape(fileName, slideIndex,  shape1, null, null, password, folderName, null, "1");
-        testSlidesApi.createShape(fileName, slideIndex,  shape2, null, null, password, folderName, null, "1");
-        testSlidesApi.createShape(fileName, slideIndex,  shape3, null, null, password, folderName, null, "1");
+        testSlidesApi.createShape(fileName, slideIndex,  shape1, null, null, null, password, folderName, null, "1");
+        testSlidesApi.createShape(fileName, slideIndex,  shape2, null, null, null, password, folderName, null, "1");
+        testSlidesApi.createShape(fileName, slideIndex,  shape3, null, null, null, password, folderName, null, "1");
 
         shapes = testSlidesApi.getShapes(fileName, slideIndex, password, folderName, null, null, null);
         assertEquals(1, shapes.getShapesLinks().size());
@@ -797,6 +797,29 @@ public class ShapeTest extends ApiTest {
         assertNotNull(result);
         assertTrue(result.length() > 0);
         assertTrue(result.canRead());
+    }
+
+    @Test
+    public void smartArtNodeDefaultParagraphFormatTest() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        int slideIndex = 7;
+        SmartArt existing = (SmartArt) testSlidesApi.getShape(fileName, slideIndex, c_smartArtIndex, password, folderName, null, null);
+        ParagraphFormat paragraphFormat = new ParagraphFormat();
+        SolidFill bulletFill = new SolidFill();
+        bulletFill.setColor("#FFFF0000");
+        paragraphFormat.setBulletFillFormat(bulletFill);
+        existing.getNodes().get(0).setDefaultParagraphFormat(paragraphFormat);
+        SmartArt updated = (SmartArt) testSlidesApi.updateShape(fileName, slideIndex, c_smartArtIndex, existing, password, folderName, null, null);
+        assertNotNull(updated.getNodes().get(0).getDefaultParagraphFormat());
+        assertEquals("Solid", updated.getNodes().get(0).getDefaultParagraphFormat().getBulletFillFormat().getType());
+        assertEquals("#FFFF0000", ((SolidFill) updated.getNodes().get(0).getDefaultParagraphFormat().getBulletFillFormat()).getColor());
+    }
+
+    @Test
+    public void shapeCloneFromSlideTest() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        ShapeBase shape = testSlidesApi.createShape(fileName, c_slideIndex, null, 1, 1, null, password, folderName, null, null);
+        assertNotNull(shape);
     }
 
     private final String c_svgFile = "shapes.svg";

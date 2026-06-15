@@ -33,6 +33,8 @@ import org.junit.Test;
 import com.aspose.slides.ApiTest;
 import com.aspose.slides.model.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -100,7 +102,7 @@ public class ChartTest extends ApiTest {
         series2.setDataPoints(dataPoints2);
         seriesList.add(series2);
         dto.setSeries(seriesList);
-        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertNotNull(chart);
         assertEquals(2, chart.getSeries().size());
         assertEquals(3, chart.getCategories().size());
@@ -187,7 +189,7 @@ public class ChartTest extends ApiTest {
         series2.setDataPoints(dataPoints2);
         seriesList.add(series2);
         dto.setSeries(seriesList);
-        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertNotNull(chart);
         assertEquals(2, chart.getSeries().size());
         assertEquals(3, chart.getCategories().size());
@@ -259,7 +261,7 @@ public class ChartTest extends ApiTest {
         series2.setDataPoints(dataPoints2);
         seriesList.add(series2);
         dto.setSeries(seriesList);
-        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertNotNull(chart);
         assertEquals(2, chart.getSeries().size());
         assertEquals(3, chart.getCategories().size());
@@ -529,7 +531,7 @@ public class ChartTest extends ApiTest {
         series.setDataPoints(dataPoints);
         seriesList.add(series);
         dto.setSeries(seriesList);
-        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
         assertNotNull(chart);
         assertEquals(1, chart.getSeries().size());
         assertEquals(4, chart.getCategories().size());
@@ -590,7 +592,7 @@ public class ChartTest extends ApiTest {
         dto.setSeries(seriesList);
         dto.setCategories(categoryList);
 
-        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        Chart chart = (Chart)testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
 
         assertEquals(Chart.ChartTypeEnum.CLUSTEREDCOLUMN, chart.getChartType());
         assertEquals(1, chart.getSeries().size());
@@ -792,7 +794,7 @@ public class ChartTest extends ApiTest {
         seriesList.add(series1);
 
         dto.setSeries(seriesList);
-        Chart chart = (Chart) testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, password, folderName, null, null);
+        Chart chart = (Chart) testSlidesApi.createShape(fileName, c_slideIndex, dto, null, null, null, password, folderName, null, null);
 
         assertEquals(90.0, ((OneValueSeries)chart.getSeries().get(0)).getDataPoints().get(2).getValue().doubleValue(), 0);
     }
@@ -806,4 +808,28 @@ public class ChartTest extends ApiTest {
     private static final int c_seriesCount = 3;
     private static final int c_categoryCount = 4;
     private static final int c_seriesGroupIndex = 1;
+
+    @Test
+    public void importChartFromWorkbook() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        byte[] document = Files.readAllBytes(Paths.get(testDataFolderName + "/" + c_workbookFileName));
+        ShapeBase shape = testSlidesApi.importChartFromWorkbook(fileName, c_slideIndex, c_worksheetName, document,
+                null, 1, null, null, null, null, null, password, folderName, null);
+        assertNotNull(shape);
+        assertSame(shape.getClass(), Chart.class);
+    }
+
+    @Test
+    public void importChartFromWorkbookByPath() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        byte[] document = Files.readAllBytes(Paths.get(testDataFolderName + "/" + c_workbookFileName));
+        testSlidesApi.uploadFile(folderName + "/" + c_workbookFileName, document, null);
+        ShapeBase shape = testSlidesApi.importChartFromWorkbook(fileName, c_slideIndex, c_worksheetName, null,
+                null, 1, null, null, null, folderName + "/" + c_workbookFileName, null, password, folderName, null);
+        assertNotNull(shape);
+        assertSame(shape.getClass(), Chart.class);
+    }
+
+    private static final String c_workbookFileName = "oleObject.xlsx";
+    private static final String c_worksheetName = "Sheet1";
 }

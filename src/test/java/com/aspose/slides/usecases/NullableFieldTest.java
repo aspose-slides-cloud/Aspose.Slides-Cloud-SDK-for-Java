@@ -95,7 +95,7 @@ public class NullableFieldTest extends ApiTest {
         testAxis.setMaxValue(max1);
         testAxes.setHorizontalAxis(testAxis);
         testDto.setAxes(testAxes);
-        testSlidesApi.createShape(fileName, 1, testDto, null, null, password, folderName, null, null);
+        testSlidesApi.createShape(fileName, 1, testDto, null, null, null, password, folderName, null, null);
         ShapeBase result = testSlidesApi.getShape(fileName, 1, 5, password, folderName, null, null);
         assertTrue(((Chart)result).getAxes().getHorizontalAxis().getMinValue() == min1);
         assertTrue(((Chart)result).getAxes().getHorizontalAxis().getMaxValue() == max1);

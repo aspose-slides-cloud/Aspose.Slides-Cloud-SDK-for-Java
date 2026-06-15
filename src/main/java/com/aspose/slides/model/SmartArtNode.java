@@ -28,6 +28,7 @@
 package com.aspose.slides.model;
 
 import java.util.Objects;
+import com.aspose.slides.model.ParagraphFormat;
 import com.aspose.slides.model.ResourceUri;
 import com.aspose.slides.model.SmartArtNode;
 import com.google.gson.TypeAdapter;
@@ -119,6 +120,9 @@ public class SmartArtNode {
 
   @SerializedName(value = "paragraphs", alternate = { "Paragraphs" })
   private ResourceUri paragraphs;
+
+  @SerializedName(value = "defaultParagraphFormat", alternate = { "DefaultParagraphFormat" })
+  private ParagraphFormat defaultParagraphFormat;
 
 
   public SmartArtNode() {
@@ -241,6 +245,24 @@ public class SmartArtNode {
     this.paragraphs = paragraphs;
   }
 
+  public SmartArtNode defaultParagraphFormat(ParagraphFormat defaultParagraphFormat) {
+    this.defaultParagraphFormat = defaultParagraphFormat;
+    return this;
+  }
+
+   /**
+   * Default paragraph format for the node&#39;s text frame.
+   * @return defaultParagraphFormat
+  **/
+  @ApiModelProperty(value = "Default paragraph format for the node's text frame.")
+  public ParagraphFormat getDefaultParagraphFormat() {
+    return defaultParagraphFormat;
+  }
+
+  public void setDefaultParagraphFormat(ParagraphFormat defaultParagraphFormat) {
+    this.defaultParagraphFormat = defaultParagraphFormat;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -251,12 +273,12 @@ public class SmartArtNode {
       return false;
     }
     SmartArtNode smartArtNode = (SmartArtNode) o;
-    return true && Objects.equals(this.nodes, smartArtNode.nodes) && Objects.equals(this.shapes, smartArtNode.shapes) && Objects.equals(this.isAssistant, smartArtNode.isAssistant) && Objects.equals(this.text, smartArtNode.text) && Objects.equals(this.orgChartLayout, smartArtNode.orgChartLayout) && Objects.equals(this.paragraphs, smartArtNode.paragraphs);
+    return true && Objects.equals(this.nodes, smartArtNode.nodes) && Objects.equals(this.shapes, smartArtNode.shapes) && Objects.equals(this.isAssistant, smartArtNode.isAssistant) && Objects.equals(this.text, smartArtNode.text) && Objects.equals(this.orgChartLayout, smartArtNode.orgChartLayout) && Objects.equals(this.paragraphs, smartArtNode.paragraphs) && Objects.equals(this.defaultParagraphFormat, smartArtNode.defaultParagraphFormat);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nodes, shapes, isAssistant, text, orgChartLayout, paragraphs);
+    return Objects.hash(nodes, shapes, isAssistant, text, orgChartLayout, paragraphs, defaultParagraphFormat);
   }
 
 
@@ -271,6 +293,7 @@ public class SmartArtNode {
     sb.append("    text: ").append(toIndentedString(text)).append("\n");
     sb.append("    orgChartLayout: ").append(toIndentedString(orgChartLayout)).append("\n");
     sb.append("    paragraphs: ").append(toIndentedString(paragraphs)).append("\n");
+    sb.append("    defaultParagraphFormat: ").append(toIndentedString(defaultParagraphFormat)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -50,7 +50,7 @@ public class AudioTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         AudioFrame dto = new AudioFrame();
         dto.setBase64Data("bXAzc2FtcGxl");
-        testSlidesApi.createShape(fileName, slideIndex, dto, null, null, password, folderName, null, null);
+        testSlidesApi.createShape(fileName, slideIndex, dto, null, null, null, password, folderName, null, null);
         CaptionTracks captions = testSlidesApi.getCaptionTracks(fileName, slideIndex, shapeIndex, null, password, folderName, null);
         assertEquals(0, captions.getItems().size());
 

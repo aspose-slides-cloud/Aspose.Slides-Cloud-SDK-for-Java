@@ -4781,6 +4781,7 @@ public class SlidesApi {
      * @param slideIndex Slide index. (required)
      * @param dto Shape DTO. 
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -4791,7 +4792,7 @@ public class SlidesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createShapeCall(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call createShapeCall(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'name' is set
         if (name == null) {
             throw new ApiException("Missing the required parameter 'name' when calling createShape(Async)");
@@ -4808,6 +4809,7 @@ public class SlidesApi {
 
         List<Pair> queryParams = new ArrayList<Pair>();
         apiClient.addQueryParameter(queryParams, "shapeToClone", shapeToClone);
+        apiClient.addQueryParameter(queryParams, "cloneFromSlide", cloneFromSlide);
         apiClient.addQueryParameter(queryParams, "position", position);
         apiClient.addQueryParameter(queryParams, "folder", folder);
         apiClient.addQueryParameter(queryParams, "storage", storage);
@@ -4852,6 +4854,7 @@ public class SlidesApi {
      * @param slideIndex Slide index. (required)
      * @param dto Shape DTO. 
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -4860,12 +4863,12 @@ public class SlidesApi {
      * @return ShapeBase
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ShapeBase createShape(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
+    public ShapeBase createShape(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
         try {
-            ApiResponse<ShapeBase> resp = createShapeWithHttpInfo(name, slideIndex, dto, shapeToClone, position, password, folder, storage, subShape);
+            ApiResponse<ShapeBase> resp = createShapeWithHttpInfo(name, slideIndex, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape);
             return resp.getData();
         } catch (NeedRepeatRequestException e) {
-            ApiResponse<ShapeBase> resp = createShapeWithHttpInfo(name, slideIndex, dto, shapeToClone, position, password, folder, storage, subShape);
+            ApiResponse<ShapeBase> resp = createShapeWithHttpInfo(name, slideIndex, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape);
             return resp.getData();
         }
     }
@@ -4877,6 +4880,7 @@ public class SlidesApi {
      * @param slideIndex Slide index. (required)
      * @param dto Shape DTO. 
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -4885,8 +4889,8 @@ public class SlidesApi {
      * @return ApiResponse&lt;ShapeBase&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ShapeBase> createShapeWithHttpInfo(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
-        com.squareup.okhttp.Call call = createShapeCall(name, slideIndex, dto, shapeToClone, position, password, folder, storage, subShape, null, null);
+    public ApiResponse<ShapeBase> createShapeWithHttpInfo(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
+        com.squareup.okhttp.Call call = createShapeCall(name, slideIndex, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape, null, null);
         Type returnType = new TypeToken<ShapeBase>(){}.getType();
         return apiClient.execute(call, returnType);
     }
@@ -4898,6 +4902,7 @@ public class SlidesApi {
      * @param slideIndex Slide index. (required)
      * @param dto Shape DTO. 
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -4907,7 +4912,7 @@ public class SlidesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createShapeAsync(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape, final ApiCallback<ShapeBase> callback) throws ApiException {
+    public com.squareup.okhttp.Call createShapeAsync(String name, Integer slideIndex, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape, final ApiCallback<ShapeBase> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -4928,7 +4933,7 @@ public class SlidesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = createShapeCall(name, slideIndex, dto, shapeToClone, position, password, folder, storage, subShape, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = createShapeCall(name, slideIndex, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape, progressListener, progressRequestListener);
         Type returnType = new TypeToken<ShapeBase>(){}.getType();
         apiClient.executeAsync(call, returnType, callback);
         return call;
@@ -6070,6 +6075,7 @@ public class SlidesApi {
      * @param slideType Slide type (master, layout or notes). (required)
      * @param dto Shape DTO. (required)
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -6080,7 +6086,7 @@ public class SlidesApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call createSpecialSlideShapeCall(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call createSpecialSlideShapeCall(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'name' is set
         if (name == null) {
             throw new ApiException("Missing the required parameter 'name' when calling createSpecialSlideShape(Async)");
@@ -6105,6 +6111,7 @@ public class SlidesApi {
 
         List<Pair> queryParams = new ArrayList<Pair>();
         apiClient.addQueryParameter(queryParams, "shapeToClone", shapeToClone);
+        apiClient.addQueryParameter(queryParams, "cloneFromSlide", cloneFromSlide);
         apiClient.addQueryParameter(queryParams, "position", position);
         apiClient.addQueryParameter(queryParams, "folder", folder);
         apiClient.addQueryParameter(queryParams, "storage", storage);
@@ -6150,6 +6157,7 @@ public class SlidesApi {
      * @param slideType Slide type (master, layout or notes). (required)
      * @param dto Shape DTO. (required)
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -6158,12 +6166,12 @@ public class SlidesApi {
      * @return ShapeBase
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ShapeBase createSpecialSlideShape(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
+    public ShapeBase createSpecialSlideShape(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
         try {
-            ApiResponse<ShapeBase> resp = createSpecialSlideShapeWithHttpInfo(name, slideIndex, slideType, dto, shapeToClone, position, password, folder, storage, subShape);
+            ApiResponse<ShapeBase> resp = createSpecialSlideShapeWithHttpInfo(name, slideIndex, slideType, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape);
             return resp.getData();
         } catch (NeedRepeatRequestException e) {
-            ApiResponse<ShapeBase> resp = createSpecialSlideShapeWithHttpInfo(name, slideIndex, slideType, dto, shapeToClone, position, password, folder, storage, subShape);
+            ApiResponse<ShapeBase> resp = createSpecialSlideShapeWithHttpInfo(name, slideIndex, slideType, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape);
             return resp.getData();
         }
     }
@@ -6176,6 +6184,7 @@ public class SlidesApi {
      * @param slideType Slide type (master, layout or notes). (required)
      * @param dto Shape DTO. (required)
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -6184,8 +6193,8 @@ public class SlidesApi {
      * @return ApiResponse&lt;ShapeBase&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<ShapeBase> createSpecialSlideShapeWithHttpInfo(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
-        com.squareup.okhttp.Call call = createSpecialSlideShapeCall(name, slideIndex, slideType, dto, shapeToClone, position, password, folder, storage, subShape, null, null);
+    public ApiResponse<ShapeBase> createSpecialSlideShapeWithHttpInfo(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape) throws ApiException {
+        com.squareup.okhttp.Call call = createSpecialSlideShapeCall(name, slideIndex, slideType, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape, null, null);
         Type returnType = new TypeToken<ShapeBase>(){}.getType();
         return apiClient.execute(call, returnType);
     }
@@ -6198,6 +6207,7 @@ public class SlidesApi {
      * @param slideType Slide type (master, layout or notes). (required)
      * @param dto Shape DTO. (required)
      * @param shapeToClone Optional index for clone shape instead of adding a new one. 
+     * @param cloneFromSlide Optional index of the slide to clone the shape from. When set, shapeToClone refers to a shape on that slide. 
      * @param position Position of the new shape in the list. Default is at the end of the list. 
      * @param password Document password. 
      * @param folder Document folder. 
@@ -6207,7 +6217,7 @@ public class SlidesApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call createSpecialSlideShapeAsync(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer position, String password, String folder, String storage, String subShape, final ApiCallback<ShapeBase> callback) throws ApiException {
+    public com.squareup.okhttp.Call createSpecialSlideShapeAsync(String name, Integer slideIndex, SpecialSlideType slideType, ShapeBase dto, Integer shapeToClone, Integer cloneFromSlide, Integer position, String password, String folder, String storage, String subShape, final ApiCallback<ShapeBase> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -6228,7 +6238,7 @@ public class SlidesApi {
             };
         }
 
-        com.squareup.okhttp.Call call = createSpecialSlideShapeCall(name, slideIndex, slideType, dto, shapeToClone, position, password, folder, storage, subShape, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = createSpecialSlideShapeCall(name, slideIndex, slideType, dto, shapeToClone, cloneFromSlide, position, password, folder, storage, subShape, progressListener, progressRequestListener);
         Type returnType = new TypeToken<ShapeBase>(){}.getType();
         apiClient.executeAsync(call, returnType, callback);
         return call;
@@ -28478,6 +28488,195 @@ public class SlidesApi {
         return call;
     }
     /**
+     * Build call for importChartFromWorkbook
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the chart. (required)
+     * @param document Excel workbook data. 
+     * @param chartName The name of the chart. Required if chartIndex is not specified. 
+     * @param chartIndex The zero-based index of the chart in the worksheet. Takes precedence over chartName. 
+     * @param x X coordinate of the chart (EMU). 
+     * @param y Y coordinate of the chart (EMU). 
+     * @param embedAllWorkbook If true, the entire workbook is embedded; if false, only chart data. 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call importChartFromWorkbookCall(String name, Integer slideIndex, String worksheetName, byte[] document, String chartName, Integer chartIndex, Double x, Double y, Boolean embedAllWorkbook, String workbookPath, String workbookStorage, String password, String folder, String storage, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling importChartFromWorkbook(Async)");
+        }
+        // verify the required parameter 'slideIndex' is set
+        if (slideIndex == null) {
+            throw new ApiException("Missing the required parameter 'slideIndex' when calling importChartFromWorkbook(Async)");
+        }
+        // verify the required parameter 'worksheetName' is set
+        if (worksheetName == null) {
+            throw new ApiException("Missing the required parameter 'worksheetName' when calling importChartFromWorkbook(Async)");
+        }
+        Object postBody = null;
+
+        // create path and map variables
+        String methodPath = "/slides/{name}/slides/{slideIndex}/shapes/fromExcelChart"
+            .replaceAll("\\{" + "name" + "\\}", apiClient.objectToString(name)).replaceAll("\\{" + "slideIndex" + "\\}", apiClient.objectToString(slideIndex));
+
+        List<Pair> queryParams = new ArrayList<Pair>();
+        apiClient.addQueryParameter(queryParams, "worksheetName", worksheetName);
+        apiClient.addQueryParameter(queryParams, "chartName", chartName);
+        apiClient.addQueryParameter(queryParams, "chartIndex", chartIndex);
+        apiClient.addQueryParameter(queryParams, "x", x);
+        apiClient.addQueryParameter(queryParams, "y", y);
+        apiClient.addQueryParameter(queryParams, "embedAllWorkbook", embedAllWorkbook);
+        apiClient.addQueryParameter(queryParams, "workbookPath", workbookPath);
+        apiClient.addQueryParameter(queryParams, "workbookStorage", workbookStorage);
+        apiClient.addQueryParameter(queryParams, "folder", folder);
+        apiClient.addQueryParameter(queryParams, "storage", storage);
+
+        Map<String, String> headerParams = new HashMap<String, String>();
+        if (password != null)
+        headerParams.put("password", apiClient.parameterToString(password));
+
+        Map<String, Object> formParams = new LinkedHashMap<String, Object>();
+        if (document != null)
+        formParams.put("document", document);
+
+        final String[] accepts = {
+            "application/json"
+        };
+        final String accept = apiClient.selectHeaderAccept(accepts);
+        if (accept != null) headerParams.put("Accept", accept);
+
+        final String[] contentTypes = {
+            "multipart/form-data"
+        };
+        final String contentType = apiClient.selectHeaderContentType(contentTypes);
+        headerParams.put("Content-Type", contentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+        return apiClient.buildCall(methodPath, "POST", queryParams, postBody, headerParams, formParams, progressRequestListener);
+    }
+
+    /**
+     * Imports a chart from an Excel workbook and adds it to the slide.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the chart. (required)
+     * @param document Excel workbook data. 
+     * @param chartName The name of the chart. Required if chartIndex is not specified. 
+     * @param chartIndex The zero-based index of the chart in the worksheet. Takes precedence over chartName. 
+     * @param x X coordinate of the chart (EMU). 
+     * @param y Y coordinate of the chart (EMU). 
+     * @param embedAllWorkbook If true, the entire workbook is embedded; if false, only chart data. 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @return ShapeBase
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ShapeBase importChartFromWorkbook(String name, Integer slideIndex, String worksheetName, byte[] document, String chartName, Integer chartIndex, Double x, Double y, Boolean embedAllWorkbook, String workbookPath, String workbookStorage, String password, String folder, String storage) throws ApiException {
+        try {
+            ApiResponse<ShapeBase> resp = importChartFromWorkbookWithHttpInfo(name, slideIndex, worksheetName, document, chartName, chartIndex, x, y, embedAllWorkbook, workbookPath, workbookStorage, password, folder, storage);
+            return resp.getData();
+        } catch (NeedRepeatRequestException e) {
+            ApiResponse<ShapeBase> resp = importChartFromWorkbookWithHttpInfo(name, slideIndex, worksheetName, document, chartName, chartIndex, x, y, embedAllWorkbook, workbookPath, workbookStorage, password, folder, storage);
+            return resp.getData();
+        }
+    }
+
+    /**
+     * Imports a chart from an Excel workbook and adds it to the slide.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the chart. (required)
+     * @param document Excel workbook data. 
+     * @param chartName The name of the chart. Required if chartIndex is not specified. 
+     * @param chartIndex The zero-based index of the chart in the worksheet. Takes precedence over chartName. 
+     * @param x X coordinate of the chart (EMU). 
+     * @param y Y coordinate of the chart (EMU). 
+     * @param embedAllWorkbook If true, the entire workbook is embedded; if false, only chart data. 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @return ApiResponse&lt;ShapeBase&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ShapeBase> importChartFromWorkbookWithHttpInfo(String name, Integer slideIndex, String worksheetName, byte[] document, String chartName, Integer chartIndex, Double x, Double y, Boolean embedAllWorkbook, String workbookPath, String workbookStorage, String password, String folder, String storage) throws ApiException {
+        com.squareup.okhttp.Call call = importChartFromWorkbookCall(name, slideIndex, worksheetName, document, chartName, chartIndex, x, y, embedAllWorkbook, workbookPath, workbookStorage, password, folder, storage, null, null);
+        Type returnType = new TypeToken<ShapeBase>(){}.getType();
+        return apiClient.execute(call, returnType);
+    }
+
+    /**
+     * Imports a chart from an Excel workbook and adds it to the slide. (asynchronously)
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the chart. (required)
+     * @param document Excel workbook data. 
+     * @param chartName The name of the chart. Required if chartIndex is not specified. 
+     * @param chartIndex The zero-based index of the chart in the worksheet. Takes precedence over chartName. 
+     * @param x X coordinate of the chart (EMU). 
+     * @param y Y coordinate of the chart (EMU). 
+     * @param embedAllWorkbook If true, the entire workbook is embedded; if false, only chart data. 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call importChartFromWorkbookAsync(String name, Integer slideIndex, String worksheetName, byte[] document, String chartName, Integer chartIndex, Double x, Double y, Boolean embedAllWorkbook, String workbookPath, String workbookStorage, String password, String folder, String storage, final ApiCallback<ShapeBase> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = importChartFromWorkbookCall(name, slideIndex, worksheetName, document, chartName, chartIndex, x, y, embedAllWorkbook, workbookPath, workbookStorage, password, folder, storage, progressListener, progressRequestListener);
+        Type returnType = new TypeToken<ShapeBase>(){}.getType();
+        apiClient.executeAsync(call, returnType, callback);
+        return call;
+    }
+    /**
      * Build call for importFromHtml
      * @param name Document name. (required)
      * @param html HTML data. 
@@ -28939,6 +29138,189 @@ public class SlidesApi {
 
         com.squareup.okhttp.Call call = importShapesFromSvgCall(name, slideIndex, image, x, y, width, height, shapes, group, password, folder, storage, progressListener, progressRequestListener);
         Type returnType = new TypeToken<Shapes>(){}.getType();
+        apiClient.executeAsync(call, returnType, callback);
+        return call;
+    }
+    /**
+     * Build call for importTableFromWorkbook
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the table. (required)
+     * @param cellRange The cell range that defines the table (e.g. \"A1:D10\"). (required)
+     * @param document Excel workbook data. 
+     * @param x X coordinate of the table (EMU). 
+     * @param y Y coordinate of the table (EMU). 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call importTableFromWorkbookCall(String name, Integer slideIndex, String worksheetName, String cellRange, byte[] document, Double x, Double y, String workbookPath, String workbookStorage, String password, String folder, String storage, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling importTableFromWorkbook(Async)");
+        }
+        // verify the required parameter 'slideIndex' is set
+        if (slideIndex == null) {
+            throw new ApiException("Missing the required parameter 'slideIndex' when calling importTableFromWorkbook(Async)");
+        }
+        // verify the required parameter 'worksheetName' is set
+        if (worksheetName == null) {
+            throw new ApiException("Missing the required parameter 'worksheetName' when calling importTableFromWorkbook(Async)");
+        }
+        // verify the required parameter 'cellRange' is set
+        if (cellRange == null) {
+            throw new ApiException("Missing the required parameter 'cellRange' when calling importTableFromWorkbook(Async)");
+        }
+        Object postBody = null;
+
+        // create path and map variables
+        String methodPath = "/slides/{name}/slides/{slideIndex}/shapes/fromExcelTable"
+            .replaceAll("\\{" + "name" + "\\}", apiClient.objectToString(name)).replaceAll("\\{" + "slideIndex" + "\\}", apiClient.objectToString(slideIndex));
+
+        List<Pair> queryParams = new ArrayList<Pair>();
+        apiClient.addQueryParameter(queryParams, "worksheetName", worksheetName);
+        apiClient.addQueryParameter(queryParams, "cellRange", cellRange);
+        apiClient.addQueryParameter(queryParams, "x", x);
+        apiClient.addQueryParameter(queryParams, "y", y);
+        apiClient.addQueryParameter(queryParams, "workbookPath", workbookPath);
+        apiClient.addQueryParameter(queryParams, "workbookStorage", workbookStorage);
+        apiClient.addQueryParameter(queryParams, "folder", folder);
+        apiClient.addQueryParameter(queryParams, "storage", storage);
+
+        Map<String, String> headerParams = new HashMap<String, String>();
+        if (password != null)
+        headerParams.put("password", apiClient.parameterToString(password));
+
+        Map<String, Object> formParams = new LinkedHashMap<String, Object>();
+        if (document != null)
+        formParams.put("document", document);
+
+        final String[] accepts = {
+            "application/json"
+        };
+        final String accept = apiClient.selectHeaderAccept(accepts);
+        if (accept != null) headerParams.put("Accept", accept);
+
+        final String[] contentTypes = {
+            "multipart/form-data"
+        };
+        final String contentType = apiClient.selectHeaderContentType(contentTypes);
+        headerParams.put("Content-Type", contentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+        return apiClient.buildCall(methodPath, "POST", queryParams, postBody, headerParams, formParams, progressRequestListener);
+    }
+
+    /**
+     * Imports a table from an Excel workbook and adds it to the slide.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the table. (required)
+     * @param cellRange The cell range that defines the table (e.g. \"A1:D10\"). (required)
+     * @param document Excel workbook data. 
+     * @param x X coordinate of the table (EMU). 
+     * @param y Y coordinate of the table (EMU). 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @return ShapeBase
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ShapeBase importTableFromWorkbook(String name, Integer slideIndex, String worksheetName, String cellRange, byte[] document, Double x, Double y, String workbookPath, String workbookStorage, String password, String folder, String storage) throws ApiException {
+        try {
+            ApiResponse<ShapeBase> resp = importTableFromWorkbookWithHttpInfo(name, slideIndex, worksheetName, cellRange, document, x, y, workbookPath, workbookStorage, password, folder, storage);
+            return resp.getData();
+        } catch (NeedRepeatRequestException e) {
+            ApiResponse<ShapeBase> resp = importTableFromWorkbookWithHttpInfo(name, slideIndex, worksheetName, cellRange, document, x, y, workbookPath, workbookStorage, password, folder, storage);
+            return resp.getData();
+        }
+    }
+
+    /**
+     * Imports a table from an Excel workbook and adds it to the slide.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the table. (required)
+     * @param cellRange The cell range that defines the table (e.g. \"A1:D10\"). (required)
+     * @param document Excel workbook data. 
+     * @param x X coordinate of the table (EMU). 
+     * @param y Y coordinate of the table (EMU). 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @return ApiResponse&lt;ShapeBase&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<ShapeBase> importTableFromWorkbookWithHttpInfo(String name, Integer slideIndex, String worksheetName, String cellRange, byte[] document, Double x, Double y, String workbookPath, String workbookStorage, String password, String folder, String storage) throws ApiException {
+        com.squareup.okhttp.Call call = importTableFromWorkbookCall(name, slideIndex, worksheetName, cellRange, document, x, y, workbookPath, workbookStorage, password, folder, storage, null, null);
+        Type returnType = new TypeToken<ShapeBase>(){}.getType();
+        return apiClient.execute(call, returnType);
+    }
+
+    /**
+     * Imports a table from an Excel workbook and adds it to the slide. (asynchronously)
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param worksheetName The name of the worksheet that contains the table. (required)
+     * @param cellRange The cell range that defines the table (e.g. \"A1:D10\"). (required)
+     * @param document Excel workbook data. 
+     * @param x X coordinate of the table (EMU). 
+     * @param y Y coordinate of the table (EMU). 
+     * @param workbookPath Storage path to the workbook. If omitted, the workbook must be uploaded as multipart form data. 
+     * @param workbookStorage Storage name for workbookPath. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call importTableFromWorkbookAsync(String name, Integer slideIndex, String worksheetName, String cellRange, byte[] document, Double x, Double y, String workbookPath, String workbookStorage, String password, String folder, String storage, final ApiCallback<ShapeBase> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = importTableFromWorkbookCall(name, slideIndex, worksheetName, cellRange, document, x, y, workbookPath, workbookStorage, password, folder, storage, progressListener, progressRequestListener);
+        Type returnType = new TypeToken<ShapeBase>(){}.getType();
         apiClient.executeAsync(call, returnType, callback);
         return call;
     }

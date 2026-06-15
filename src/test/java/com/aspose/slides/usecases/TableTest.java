@@ -5,6 +5,8 @@ import com.aspose.slides.model.*;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -305,6 +307,30 @@ public class TableTest extends ApiTest {
         assertEquals(response.getItems().size(), 1);
     }
 
+    @Test
+    public void importTableFromWorkbook() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        byte[] document = Files.readAllBytes(Paths.get(testDataFolderName + "/" + c_workbookFileName));
+        ShapeBase shape = testSlidesApi.importTableFromWorkbook(fileName, c_slideIndex, c_worksheetName, c_cellRange,
+                document, null, null, null, null, password, folderName, null);
+        assertNotNull(shape);
+        assertSame(shape.getClass(), Table.class);
+    }
+
+    @Test
+    public void importTableFromWorkbookByPath() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        byte[] document = Files.readAllBytes(Paths.get(testDataFolderName + "/" + c_workbookFileName));
+        testSlidesApi.uploadFile(folderName + "/" + c_workbookFileName, document, null);
+        ShapeBase shape = testSlidesApi.importTableFromWorkbook(fileName, c_slideIndex, c_worksheetName, c_cellRange,
+                null, null, null, folderName + "/" + c_workbookFileName, null, password, folderName, null);
+        assertNotNull(shape);
+        assertSame(shape.getClass(), Table.class);
+    }
+
     private static final int c_slideIndex = 9;
     private static final int c_shapeIndex = 1;
+    private static final String c_workbookFileName = "oleObject.xlsx";
+    private static final String c_worksheetName = "Sheet1";
+    private static final String c_cellRange = "A1:B5";
 }

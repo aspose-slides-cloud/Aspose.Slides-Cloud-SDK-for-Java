@@ -76,7 +76,7 @@ public class MasterSlideTest extends ApiTest {
         dto.setShapeType(GeometryShape.ShapeTypeEnum.RECTANGLE);
         dto.setText("New shape");
         Shape shape = (Shape)testSlidesApi.createSpecialSlideShape(fileName, c_slideIndex, SpecialSlideType.MASTERSLIDE, dto,
-                null, null, password, folderName, null, null);
+                null, null, null, password, folderName, null, null);
         assertEquals(dto.getText(), shape.getText());
         shapes = testSlidesApi.getSpecialSlideShapes(fileName, c_slideIndex, SpecialSlideType.MASTERSLIDE, password, folderName, null, null);
         assertEquals(c_shapeCount + 1, shapes.getShapesLinks().size());

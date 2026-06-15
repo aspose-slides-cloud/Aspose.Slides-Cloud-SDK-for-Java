@@ -30,6 +30,7 @@ package com.aspose.slides;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 import java.util.Map;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 public class Configuration {
     @SerializedName("BaseUrl")
@@ -41,6 +42,17 @@ public class Configuration {
 
     public void setBaseUrl(String value) {
         baseUrl = value;
+    }
+
+    @SerializedName("AsyncBaseUrl")
+    private String asyncBaseUrl;
+
+    public String getAsyncBaseUrl() {
+        return asyncBaseUrl != null ? asyncBaseUrl : baseUrl;
+    }
+
+    public void setAsyncBaseUrl(String value) {
+        asyncBaseUrl = value;
     }
 
     @SerializedName("AuthBaseUrl")
@@ -110,6 +122,16 @@ public class Configuration {
 
     public void setDebug(Boolean value) {
         debug = value;
+    }
+
+    private HttpLoggingInterceptor.Logger logger;
+
+    public HttpLoggingInterceptor.Logger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(HttpLoggingInterceptor.Logger value) {
+        logger = value;
     }
     
     private int timeout = 0;

@@ -153,6 +153,72 @@ public class PptxExportOptions extends ExportOptions {
   @SerializedName(value = "zip64Mode", alternate = { "Zip64Mode" })
   private Zip64ModeEnum zip64Mode;
 
+  /**
+   * The compression level used when saving the presentation document. Higher compression levels produce smaller files but require more processing time. The actual compression ratio depends on the content of the presentation. The default value is CompressionLevel.Level6.
+   */
+  @JsonAdapter(CompressionLevelEnum.Adapter.class)
+  public enum CompressionLevelEnum {
+    NONE("None"),
+    
+    LEVEL1("Level1"),
+    
+    LEVEL2("Level2"),
+    
+    LEVEL3("Level3"),
+    
+    LEVEL4("Level4"),
+    
+    LEVEL5("Level5"),
+    
+    LEVEL6("Level6"),
+    
+    LEVEL7("Level7"),
+    
+    LEVEL8("Level8"),
+    
+    LEVEL9("Level9");
+
+    private String value;
+
+    CompressionLevelEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static CompressionLevelEnum fromValue(String text) {
+      for (CompressionLevelEnum b : CompressionLevelEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<CompressionLevelEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final CompressionLevelEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public CompressionLevelEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return CompressionLevelEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName(value = "compressionLevel", alternate = { "CompressionLevel" })
+  private CompressionLevelEnum compressionLevel;
+
   @SerializedName(value = "refreshThumbnail", alternate = { "RefreshThumbnail" })
   private Boolean refreshThumbnail;
 
@@ -198,6 +264,24 @@ public class PptxExportOptions extends ExportOptions {
     this.zip64Mode = zip64Mode;
   }
 
+  public PptxExportOptions compressionLevel(CompressionLevelEnum compressionLevel) {
+    this.compressionLevel = compressionLevel;
+    return this;
+  }
+
+   /**
+   * The compression level used when saving the presentation document. Higher compression levels produce smaller files but require more processing time. The actual compression ratio depends on the content of the presentation. The default value is CompressionLevel.Level6.
+   * @return compressionLevel
+  **/
+  @ApiModelProperty(value = "The compression level used when saving the presentation document. Higher compression levels produce smaller files but require more processing time. The actual compression ratio depends on the content of the presentation. The default value is CompressionLevel.Level6.")
+  public CompressionLevelEnum getCompressionLevel() {
+    return compressionLevel;
+  }
+
+  public void setCompressionLevel(CompressionLevelEnum compressionLevel) {
+    this.compressionLevel = compressionLevel;
+  }
+
   public PptxExportOptions refreshThumbnail(Boolean refreshThumbnail) {
     this.refreshThumbnail = refreshThumbnail;
     return this;
@@ -226,12 +310,12 @@ public class PptxExportOptions extends ExportOptions {
       return false;
     }
     PptxExportOptions pptxExportOptions = (PptxExportOptions) o;
-    return true && Objects.equals(this.conformance, pptxExportOptions.conformance) && Objects.equals(this.zip64Mode, pptxExportOptions.zip64Mode) && Objects.equals(this.refreshThumbnail, pptxExportOptions.refreshThumbnail) && super.equals(o);
+    return true && Objects.equals(this.conformance, pptxExportOptions.conformance) && Objects.equals(this.zip64Mode, pptxExportOptions.zip64Mode) && Objects.equals(this.compressionLevel, pptxExportOptions.compressionLevel) && Objects.equals(this.refreshThumbnail, pptxExportOptions.refreshThumbnail) && super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(conformance, zip64Mode, refreshThumbnail, super.hashCode());
+    return Objects.hash(conformance, zip64Mode, compressionLevel, refreshThumbnail, super.hashCode());
   }
 
 
@@ -242,6 +326,7 @@ public class PptxExportOptions extends ExportOptions {
     sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    conformance: ").append(toIndentedString(conformance)).append("\n");
     sb.append("    zip64Mode: ").append(toIndentedString(zip64Mode)).append("\n");
+    sb.append("    compressionLevel: ").append(toIndentedString(compressionLevel)).append("\n");
     sb.append("    refreshThumbnail: ").append(toIndentedString(refreshThumbnail)).append("\n");
     sb.append("}");
     return sb.toString();
