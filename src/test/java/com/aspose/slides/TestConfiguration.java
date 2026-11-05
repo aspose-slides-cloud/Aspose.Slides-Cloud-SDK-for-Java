@@ -27,22 +27,7 @@
 
 package com.aspose.slides;
 
-import com.google.gson.annotations.SerializedName;
-import java.util.HashMap;
-import java.util.Map;
-
 public class TestConfiguration extends Configuration {
-    @SerializedName("AsyncBaseUrl")
-    private String asyncBaseUrl;
-
-    public String getAsyncBaseUrl() {
-        return asyncBaseUrl != null ? asyncBaseUrl : getBaseUrl();
-    }
-
-    public void setAsyncBaseUrl(String value) {
-        asyncBaseUrl = value;
-    }
-
     public TestConfiguration() {
         super();
     }

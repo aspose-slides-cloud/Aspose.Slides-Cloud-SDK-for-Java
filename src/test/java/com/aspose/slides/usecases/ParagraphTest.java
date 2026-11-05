@@ -5,6 +5,7 @@ import com.aspose.slides.ApiTest;
 import com.aspose.slides.model.*;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -203,6 +204,56 @@ public class ParagraphTest extends ApiTest {
         testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
         Paragraph response = testSlidesApi.getParagraphEffective(fileName, c_slideIndex, 3, 1, password, folderName, null, "1");
         assertEquals((Double) 72.0, response.getDefaultTabSize());
+    }
+
+    @Test
+    public void downloadParagraphTest() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        File response = testSlidesApi.downloadParagraph(fileName, c_slideIndex, c_shapeIndex, 1,
+                ImageExportFormat.PNG, null, null, null, password, folderName, null, null, null);
+        assertNotNull(response);
+        assertTrue(response.length() > 0);
+        assertTrue(response.canRead());
+    }
+
+    @Test
+    public void downloadSubShapeParagraphTest() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        File response = testSlidesApi.downloadParagraph(fileName, c_slideIndex, 3, 1,
+                ImageExportFormat.PNG, null, null, null, password, folderName, null, null, "1");
+        assertNotNull(response);
+        assertTrue(response.length() > 0);
+        assertTrue(response.canRead());
+    }
+
+    @Test
+    public void downloadParagraphScaledTest() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        File response = testSlidesApi.downloadParagraph(fileName, c_slideIndex, c_shapeIndex, 1,
+                ImageExportFormat.PNG, null, null, null, password, folderName, null, null, null);
+        File scaledResponse = testSlidesApi.downloadParagraph(fileName, c_slideIndex, c_shapeIndex, 1,
+                ImageExportFormat.PNG, 2.0, 2.0, null, password, folderName, null, null, null);
+        assertTrue(scaledResponse.length() > response.length());
+    }
+
+    @Test
+    public void saveParagraphTest() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        String outPath = folderName + "/paragraph.png";
+        testSlidesApi.saveParagraph(fileName, c_slideIndex, c_shapeIndex, 1, ImageExportFormat.PNG, outPath,
+                null, null, null, password, folderName, null, null, null);
+        ObjectExist exists = testSlidesApi.objectExists(outPath, null, null);
+        assertTrue(exists.isExists());
+    }
+
+    @Test
+    public void saveSubShapeParagraphTest() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+        String outPath = folderName + "/paragraph.png";
+        testSlidesApi.saveParagraph(fileName, c_slideIndex, 3, 1, ImageExportFormat.PNG, outPath,
+                null, null, null, password, folderName, null, null, "1");
+        ObjectExist exists = testSlidesApi.objectExists(outPath, null, null);
+        assertTrue(exists.isExists());
     }
 
     private final int c_slideIndex = 6;

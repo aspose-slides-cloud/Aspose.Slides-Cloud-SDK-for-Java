@@ -811,7 +811,7 @@ public class ShapeTest extends ApiTest {
         existing.getNodes().get(0).setDefaultParagraphFormat(paragraphFormat);
         SmartArt updated = (SmartArt) testSlidesApi.updateShape(fileName, slideIndex, c_smartArtIndex, existing, password, folderName, null, null);
         assertNotNull(updated.getNodes().get(0).getDefaultParagraphFormat());
-        assertEquals("Solid", updated.getNodes().get(0).getDefaultParagraphFormat().getBulletFillFormat().getType());
+        assertEquals("Solid", updated.getNodes().get(0).getDefaultParagraphFormat().getBulletFillFormat().getType().toString());
         assertEquals("#FFFF0000", ((SolidFill) updated.getNodes().get(0).getDefaultParagraphFormat().getBulletFillFormat()).getColor());
     }
 

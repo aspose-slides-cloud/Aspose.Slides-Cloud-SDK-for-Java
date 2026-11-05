@@ -68,6 +68,64 @@ public class Html5ExportOptions extends ExportOptions {
   @SerializedName(value = "disableFontLigatures", alternate = { "DisableFontLigatures" })
   private Boolean disableFontLigatures;
 
+  /**
+   * Represents the pictures compression level. Pictures are not compressed (DocumentResolution) by default. Not applied when TemplatesPath is set.
+   */
+  @JsonAdapter(PicturesCompressionEnum.Adapter.class)
+  public enum PicturesCompressionEnum {
+    DPI330("Dpi330"),
+    
+    DPI220("Dpi220"),
+    
+    DPI150("Dpi150"),
+    
+    DPI96("Dpi96"),
+    
+    DPI72("Dpi72"),
+    
+    DOCUMENTRESOLUTION("DocumentResolution");
+
+    private String value;
+
+    PicturesCompressionEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static PicturesCompressionEnum fromValue(String text) {
+      for (PicturesCompressionEnum b : PicturesCompressionEnum.values()) {
+        if (String.valueOf(b.value).equals(text)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<PicturesCompressionEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final PicturesCompressionEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public PicturesCompressionEnum read(final JsonReader jsonReader) throws IOException {
+        String value = jsonReader.nextString();
+        return PicturesCompressionEnum.fromValue(String.valueOf(value));
+      }
+    }
+  }
+
+  @SerializedName(value = "picturesCompression", alternate = { "PicturesCompression" })
+  private PicturesCompressionEnum picturesCompression;
+
 
   public Html5ExportOptions() {
     super();
@@ -182,6 +240,24 @@ public class Html5ExportOptions extends ExportOptions {
     this.disableFontLigatures = disableFontLigatures;
   }
 
+  public Html5ExportOptions picturesCompression(PicturesCompressionEnum picturesCompression) {
+    this.picturesCompression = picturesCompression;
+    return this;
+  }
+
+   /**
+   * Represents the pictures compression level. Pictures are not compressed (DocumentResolution) by default. Not applied when TemplatesPath is set.
+   * @return picturesCompression
+  **/
+  @ApiModelProperty(value = "Represents the pictures compression level. Pictures are not compressed (DocumentResolution) by default. Not applied when TemplatesPath is set.")
+  public PicturesCompressionEnum getPicturesCompression() {
+    return picturesCompression;
+  }
+
+  public void setPicturesCompression(PicturesCompressionEnum picturesCompression) {
+    this.picturesCompression = picturesCompression;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -192,12 +268,12 @@ public class Html5ExportOptions extends ExportOptions {
       return false;
     }
     Html5ExportOptions html5ExportOptions = (Html5ExportOptions) o;
-    return true && Objects.equals(this.animateTransitions, html5ExportOptions.animateTransitions) && Objects.equals(this.animateShapes, html5ExportOptions.animateShapes) && Objects.equals(this.embedImages, html5ExportOptions.embedImages) && Objects.equals(this.slidesLayoutOptions, html5ExportOptions.slidesLayoutOptions) && Objects.equals(this.templatesPath, html5ExportOptions.templatesPath) && Objects.equals(this.disableFontLigatures, html5ExportOptions.disableFontLigatures) && super.equals(o);
+    return true && Objects.equals(this.animateTransitions, html5ExportOptions.animateTransitions) && Objects.equals(this.animateShapes, html5ExportOptions.animateShapes) && Objects.equals(this.embedImages, html5ExportOptions.embedImages) && Objects.equals(this.slidesLayoutOptions, html5ExportOptions.slidesLayoutOptions) && Objects.equals(this.templatesPath, html5ExportOptions.templatesPath) && Objects.equals(this.disableFontLigatures, html5ExportOptions.disableFontLigatures) && Objects.equals(this.picturesCompression, html5ExportOptions.picturesCompression) && super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(animateTransitions, animateShapes, embedImages, slidesLayoutOptions, templatesPath, disableFontLigatures, super.hashCode());
+    return Objects.hash(animateTransitions, animateShapes, embedImages, slidesLayoutOptions, templatesPath, disableFontLigatures, picturesCompression, super.hashCode());
   }
 
 
@@ -212,6 +288,7 @@ public class Html5ExportOptions extends ExportOptions {
     sb.append("    slidesLayoutOptions: ").append(toIndentedString(slidesLayoutOptions)).append("\n");
     sb.append("    templatesPath: ").append(toIndentedString(templatesPath)).append("\n");
     sb.append("    disableFontLigatures: ").append(toIndentedString(disableFontLigatures)).append("\n");
+    sb.append("    picturesCompression: ").append(toIndentedString(picturesCompression)).append("\n");
     sb.append("}");
     return sb.toString();
   }

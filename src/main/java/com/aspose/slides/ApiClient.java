@@ -962,38 +962,32 @@ public class ApiClient {
         } else if ("application/x-www-form-urlencoded".equals(contentType)) {
             reqBody = buildRequestBodyFormEncoding(formParams);
         } else if (formParams.size() > 0) {
-            List<FileInfo> files = null;
-            Object[] bodyParts = null;
-            if (List.class.isAssignableFrom(formParams.values().toArray()[0].getClass())) {
-                files = (List<FileInfo>)formParams.values().toArray()[0];
-            } else {
-                bodyParts = formParams.values().toArray();
+            Map<String, Object> parts = new LinkedHashMap<String, Object>();
+            if (body != null) {
+                parts.put("body", body);
             }
-            int partCount = (body != null ? 1 : 0) + (files != null ? files.size() : 0) + (bodyParts != null ? bodyParts.length : 0);
-            if (partCount > 1) {
-                Map<String, Object> parts = new LinkedHashMap<String, Object>();
-                if (body != null) {
-                    parts.put("body", body);
-                }
-                int fileIndex = 0;
-                if (files != null) {
-                    for (FileInfo file : files) {
+            int fileIndex = 0;
+            for (Object paramValue : formParams.values()) {
+                if (List.class.isAssignableFrom(paramValue.getClass())) {
+                    for (FileInfo file : (List<FileInfo>) paramValue) {
                         fileIndex++;
                         parts.put("file" + fileIndex, file);
                     }
+                } else {
+                    fileIndex++;
+                    parts.put("file" + fileIndex, paramValue);
                 }
-                if (bodyParts != null) {
-                    for (Object part : bodyParts) {
-                        fileIndex++;
-                        parts.put("file" + fileIndex, part);
-                    }
-                }
+            }
+            if (parts.size() > 1) {
                 reqBody = buildRequestBodyMultipart(parts);
             } else {
-                if (files != null) {
-                    reqBody = serialize(files.toArray()[0], contentType, null);
+                Object part = parts.values().toArray()[0];
+                if (part instanceof FileInfo) {
+                    List<FileInfo> files = new ArrayList<FileInfo>();
+                    files.add((FileInfo) part);
+                    reqBody = serialize(null, contentType, files);
                 } else {
-                    reqBody = serialize(bodyParts[0], contentType, null);
+                    reqBody = serialize(part, contentType, null);
                 }
             }
         } else if (formParams.size() > 1) {

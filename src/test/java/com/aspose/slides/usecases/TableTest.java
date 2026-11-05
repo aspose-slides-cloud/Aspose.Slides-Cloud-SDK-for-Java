@@ -4,6 +4,7 @@ import com.aspose.slides.ApiTest;
 import com.aspose.slides.model.*;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -228,6 +229,39 @@ public class TableTest extends ApiTest {
                 c_shapeIndex, rowIndex, cellIndex, paragraphIndex, password, folderName, null);
 
         assertEquals(response.getParagraphLinks().size(), 0);
+    }
+
+    @Test
+    public void downloadTableCellParagraph() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+
+        int rowIndex = 1;
+        int cellIndex = 1;
+        int paragraphIndex = 1;
+
+        File response = testSlidesApi.downloadTableCellParagraph(fileName, c_slideIndex, c_shapeIndex,
+                rowIndex, cellIndex, paragraphIndex, ImageExportFormat.PNG, null, null, null, password,
+                folderName, null, null);
+
+        assertNotNull(response);
+        assertTrue(response.length() > 0);
+        assertTrue(response.canRead());
+    }
+
+    @Test
+    public void saveTableCellParagraph() throws ApiException, IOException {
+        testSlidesApi.copyFile(tempFolderName + "/" + fileName, folderName + "/" + fileName, null, null, null);
+
+        int rowIndex = 1;
+        int cellIndex = 1;
+        int paragraphIndex = 1;
+        String outPath = folderName + "/tableCellParagraph.png";
+
+        testSlidesApi.saveTableCellParagraph(fileName, c_slideIndex, c_shapeIndex, rowIndex, cellIndex,
+                paragraphIndex, ImageExportFormat.PNG, outPath, null, null, null, password, folderName, null, null);
+
+        ObjectExist exists = testSlidesApi.objectExists(outPath, null, null);
+        assertTrue(exists.isExists());
     }
 
     @Test

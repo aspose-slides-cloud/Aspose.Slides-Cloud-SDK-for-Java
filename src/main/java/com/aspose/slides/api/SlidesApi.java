@@ -17389,6 +17389,194 @@ public class SlidesApi {
         return call;
     }
     /**
+     * Build call for downloadParagraph
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call downloadParagraphCall(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling downloadParagraph(Async)");
+        }
+        // verify the required parameter 'slideIndex' is set
+        if (slideIndex == null) {
+            throw new ApiException("Missing the required parameter 'slideIndex' when calling downloadParagraph(Async)");
+        }
+        // verify the required parameter 'shapeIndex' is set
+        if (shapeIndex == null) {
+            throw new ApiException("Missing the required parameter 'shapeIndex' when calling downloadParagraph(Async)");
+        }
+        // verify the required parameter 'paragraphIndex' is set
+        if (paragraphIndex == null) {
+            throw new ApiException("Missing the required parameter 'paragraphIndex' when calling downloadParagraph(Async)");
+        }
+        // verify the required parameter 'format' is set
+        if (format == null) {
+            throw new ApiException("Missing the required parameter 'format' when calling downloadParagraph(Async)");
+        }
+        Object postBody = null;
+
+        // create path and map variables
+        String methodPath = "/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/{format}"
+            .replaceAll("\\{" + "name" + "\\}", apiClient.objectToString(name)).replaceAll("\\{" + "slideIndex" + "\\}", apiClient.objectToString(slideIndex)).replaceAll("\\{" + "shapeIndex" + "\\}", apiClient.objectToString(shapeIndex)).replaceAll("\\{" + "paragraphIndex" + "\\}", apiClient.objectToString(paragraphIndex)).replaceAll("\\{" + "format" + "\\}", apiClient.objectToString(format));
+
+        List<Pair> queryParams = new ArrayList<Pair>();
+        apiClient.addQueryParameter(queryParams, "scaleX", scaleX);
+        apiClient.addQueryParameter(queryParams, "scaleY", scaleY);
+        apiClient.addQueryParameter(queryParams, "quality", quality);
+        apiClient.addQueryParameter(queryParams, "folder", folder);
+        apiClient.addQueryParameter(queryParams, "storage", storage);
+        apiClient.addQueryParameter(queryParams, "fontsFolder", fontsFolder);
+        apiClient.addQueryParameter(queryParams, "subShape", subShape);
+
+        Map<String, String> headerParams = new HashMap<String, String>();
+        if (password != null)
+        headerParams.put("password", apiClient.parameterToString(password));
+
+        Map<String, Object> formParams = new LinkedHashMap<String, Object>();
+
+        final String[] accepts = {
+            "multipart/form-data"
+        };
+        final String accept = apiClient.selectHeaderAccept(accepts);
+        if (accept != null) headerParams.put("Accept", accept);
+
+        final String[] contentTypes = {
+            "application/json"
+        };
+        final String contentType = apiClient.selectHeaderContentType(contentTypes);
+        headerParams.put("Content-Type", contentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+        return apiClient.buildCall(methodPath, "POST", queryParams, postBody, headerParams, formParams, progressRequestListener);
+    }
+
+    /**
+     * Render paragraph to specified picture format.
+     * 
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     * @return File
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public File downloadParagraph(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape) throws ApiException {
+        try {
+            ApiResponse<File> resp = downloadParagraphWithHttpInfo(name, slideIndex, shapeIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape);
+            return resp.getData();
+        } catch (NeedRepeatRequestException e) {
+            ApiResponse<File> resp = downloadParagraphWithHttpInfo(name, slideIndex, shapeIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape);
+            return resp.getData();
+        }
+    }
+
+    /**
+     * Render paragraph to specified picture format.
+     * 
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     * @return ApiResponse&lt;File&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<File> downloadParagraphWithHttpInfo(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape) throws ApiException {
+        com.squareup.okhttp.Call call = downloadParagraphCall(name, slideIndex, shapeIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape, null, null);
+        Type returnType = new TypeToken<File>(){}.getType();
+        return apiClient.execute(call, returnType);
+    }
+
+    /**
+     * Render paragraph to specified picture format. (asynchronously)
+     * 
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call downloadParagraphAsync(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape, final ApiCallback<File> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = downloadParagraphCall(name, slideIndex, shapeIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape, progressListener, progressRequestListener);
+        Type returnType = new TypeToken<File>(){}.getType();
+        apiClient.executeAsync(call, returnType, callback);
+        return call;
+    }
+    /**
      * Build call for downloadPresentation
      * @param name Document name. (required)
      * @param format Export format. (required)
@@ -18541,6 +18729,205 @@ public class SlidesApi {
         }
 
         com.squareup.okhttp.Call call = downloadSpecialSlideShapeCall(name, slideIndex, slideType, shapeIndex, format, options, scaleX, scaleY, bounds, password, folder, storage, fontsFolder, subShape, progressListener, progressRequestListener);
+        Type returnType = new TypeToken<File>(){}.getType();
+        apiClient.executeAsync(call, returnType, callback);
+        return call;
+    }
+    /**
+     * Build call for downloadTableCellParagraph
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call downloadTableCellParagraphCall(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling downloadTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'slideIndex' is set
+        if (slideIndex == null) {
+            throw new ApiException("Missing the required parameter 'slideIndex' when calling downloadTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'shapeIndex' is set
+        if (shapeIndex == null) {
+            throw new ApiException("Missing the required parameter 'shapeIndex' when calling downloadTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'rowIndex' is set
+        if (rowIndex == null) {
+            throw new ApiException("Missing the required parameter 'rowIndex' when calling downloadTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'cellIndex' is set
+        if (cellIndex == null) {
+            throw new ApiException("Missing the required parameter 'cellIndex' when calling downloadTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'paragraphIndex' is set
+        if (paragraphIndex == null) {
+            throw new ApiException("Missing the required parameter 'paragraphIndex' when calling downloadTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'format' is set
+        if (format == null) {
+            throw new ApiException("Missing the required parameter 'format' when calling downloadTableCellParagraph(Async)");
+        }
+        Object postBody = null;
+
+        // create path and map variables
+        String methodPath = "/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/{format}"
+            .replaceAll("\\{" + "name" + "\\}", apiClient.objectToString(name)).replaceAll("\\{" + "slideIndex" + "\\}", apiClient.objectToString(slideIndex)).replaceAll("\\{" + "shapeIndex" + "\\}", apiClient.objectToString(shapeIndex)).replaceAll("\\{" + "rowIndex" + "\\}", apiClient.objectToString(rowIndex)).replaceAll("\\{" + "cellIndex" + "\\}", apiClient.objectToString(cellIndex)).replaceAll("\\{" + "paragraphIndex" + "\\}", apiClient.objectToString(paragraphIndex)).replaceAll("\\{" + "format" + "\\}", apiClient.objectToString(format));
+
+        List<Pair> queryParams = new ArrayList<Pair>();
+        apiClient.addQueryParameter(queryParams, "scaleX", scaleX);
+        apiClient.addQueryParameter(queryParams, "scaleY", scaleY);
+        apiClient.addQueryParameter(queryParams, "quality", quality);
+        apiClient.addQueryParameter(queryParams, "folder", folder);
+        apiClient.addQueryParameter(queryParams, "storage", storage);
+        apiClient.addQueryParameter(queryParams, "fontsFolder", fontsFolder);
+
+        Map<String, String> headerParams = new HashMap<String, String>();
+        if (password != null)
+        headerParams.put("password", apiClient.parameterToString(password));
+
+        Map<String, Object> formParams = new LinkedHashMap<String, Object>();
+
+        final String[] accepts = {
+            "multipart/form-data"
+        };
+        final String accept = apiClient.selectHeaderAccept(accepts);
+        if (accept != null) headerParams.put("Accept", accept);
+
+        final String[] contentTypes = {
+            "application/json"
+        };
+        final String contentType = apiClient.selectHeaderContentType(contentTypes);
+        headerParams.put("Content-Type", contentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+        return apiClient.buildCall(methodPath, "POST", queryParams, postBody, headerParams, formParams, progressRequestListener);
+    }
+
+    /**
+     * Render table cell paragraph to specified picture format.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     * @return File
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public File downloadTableCellParagraph(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder) throws ApiException {
+        try {
+            ApiResponse<File> resp = downloadTableCellParagraphWithHttpInfo(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder);
+            return resp.getData();
+        } catch (NeedRepeatRequestException e) {
+            ApiResponse<File> resp = downloadTableCellParagraphWithHttpInfo(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder);
+            return resp.getData();
+        }
+    }
+
+    /**
+     * Render table cell paragraph to specified picture format.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     * @return ApiResponse&lt;File&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<File> downloadTableCellParagraphWithHttpInfo(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder) throws ApiException {
+        com.squareup.okhttp.Call call = downloadTableCellParagraphCall(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder, null, null);
+        Type returnType = new TypeToken<File>(){}.getType();
+        return apiClient.execute(call, returnType);
+    }
+
+    /**
+     * Render table cell paragraph to specified picture format. (asynchronously)
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call downloadTableCellParagraphAsync(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, final ApiCallback<File> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = downloadTableCellParagraphCall(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, scaleX, scaleY, quality, password, folder, storage, fontsFolder, progressListener, progressRequestListener);
         Type returnType = new TypeToken<File>(){}.getType();
         apiClient.executeAsync(call, returnType, callback);
         return call;
@@ -33223,6 +33610,199 @@ public class SlidesApi {
         return call;
     }
     /**
+     * Build call for saveParagraph
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call saveParagraphCall(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling saveParagraph(Async)");
+        }
+        // verify the required parameter 'slideIndex' is set
+        if (slideIndex == null) {
+            throw new ApiException("Missing the required parameter 'slideIndex' when calling saveParagraph(Async)");
+        }
+        // verify the required parameter 'shapeIndex' is set
+        if (shapeIndex == null) {
+            throw new ApiException("Missing the required parameter 'shapeIndex' when calling saveParagraph(Async)");
+        }
+        // verify the required parameter 'paragraphIndex' is set
+        if (paragraphIndex == null) {
+            throw new ApiException("Missing the required parameter 'paragraphIndex' when calling saveParagraph(Async)");
+        }
+        // verify the required parameter 'format' is set
+        if (format == null) {
+            throw new ApiException("Missing the required parameter 'format' when calling saveParagraph(Async)");
+        }
+        // verify the required parameter 'outPath' is set
+        if (outPath == null) {
+            throw new ApiException("Missing the required parameter 'outPath' when calling saveParagraph(Async)");
+        }
+        Object postBody = null;
+
+        // create path and map variables
+        String methodPath = "/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/{format}"
+            .replaceAll("\\{" + "name" + "\\}", apiClient.objectToString(name)).replaceAll("\\{" + "slideIndex" + "\\}", apiClient.objectToString(slideIndex)).replaceAll("\\{" + "shapeIndex" + "\\}", apiClient.objectToString(shapeIndex)).replaceAll("\\{" + "paragraphIndex" + "\\}", apiClient.objectToString(paragraphIndex)).replaceAll("\\{" + "format" + "\\}", apiClient.objectToString(format));
+
+        List<Pair> queryParams = new ArrayList<Pair>();
+        apiClient.addQueryParameter(queryParams, "outPath", outPath);
+        apiClient.addQueryParameter(queryParams, "scaleX", scaleX);
+        apiClient.addQueryParameter(queryParams, "scaleY", scaleY);
+        apiClient.addQueryParameter(queryParams, "quality", quality);
+        apiClient.addQueryParameter(queryParams, "folder", folder);
+        apiClient.addQueryParameter(queryParams, "storage", storage);
+        apiClient.addQueryParameter(queryParams, "fontsFolder", fontsFolder);
+        apiClient.addQueryParameter(queryParams, "subShape", subShape);
+
+        Map<String, String> headerParams = new HashMap<String, String>();
+        if (password != null)
+        headerParams.put("password", apiClient.parameterToString(password));
+
+        Map<String, Object> formParams = new LinkedHashMap<String, Object>();
+
+        final String[] accepts = {
+            "application/json"
+        };
+        final String accept = apiClient.selectHeaderAccept(accepts);
+        if (accept != null) headerParams.put("Accept", accept);
+
+        final String[] contentTypes = {
+            "application/json"
+        };
+        final String contentType = apiClient.selectHeaderContentType(contentTypes);
+        headerParams.put("Content-Type", contentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+        return apiClient.buildCall(methodPath, "PUT", queryParams, postBody, headerParams, formParams, progressRequestListener);
+    }
+
+    /**
+     * Render paragraph to specified picture format and save it to the storage.
+     * 
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void saveParagraph(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape) throws ApiException {
+        try {
+            saveParagraphWithHttpInfo(name, slideIndex, shapeIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape);
+        } catch (NeedRepeatRequestException e) {
+            saveParagraphWithHttpInfo(name, slideIndex, shapeIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape);
+        }
+    }
+
+    /**
+     * Render paragraph to specified picture format and save it to the storage.
+     * 
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> saveParagraphWithHttpInfo(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape) throws ApiException {
+        com.squareup.okhttp.Call call = saveParagraphCall(name, slideIndex, shapeIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Render paragraph to specified picture format and save it to the storage. (asynchronously)
+     * 
+     * @param name Presentation name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Index of shape starting from 1 (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Presentation folder. 
+     * @param storage Presentation storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param subShape Sub-shape path (e.g. \"3\", \"3/shapes/2). 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call saveParagraphAsync(String name, Integer slideIndex, Integer shapeIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, String subShape, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = saveParagraphCall(name, slideIndex, shapeIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder, subShape, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
      * Build call for savePresentation
      * @param name Document name. (required)
      * @param format Export format. (required)
@@ -34283,6 +34863,210 @@ public class SlidesApi {
         }
 
         com.squareup.okhttp.Call call = saveSpecialSlideShapeCall(name, slideIndex, slideType, shapeIndex, format, outPath, options, scaleX, scaleY, bounds, password, folder, storage, fontsFolder, subShape, progressListener, progressRequestListener);
+        apiClient.executeAsync(call, callback);
+        return call;
+    }
+    /**
+     * Build call for saveTableCellParagraph
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param progressListener Progress listener
+     * @param progressRequestListener Progress request listener
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     */
+    public com.squareup.okhttp.Call saveTableCellParagraphCall(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'name' is set
+        if (name == null) {
+            throw new ApiException("Missing the required parameter 'name' when calling saveTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'slideIndex' is set
+        if (slideIndex == null) {
+            throw new ApiException("Missing the required parameter 'slideIndex' when calling saveTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'shapeIndex' is set
+        if (shapeIndex == null) {
+            throw new ApiException("Missing the required parameter 'shapeIndex' when calling saveTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'rowIndex' is set
+        if (rowIndex == null) {
+            throw new ApiException("Missing the required parameter 'rowIndex' when calling saveTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'cellIndex' is set
+        if (cellIndex == null) {
+            throw new ApiException("Missing the required parameter 'cellIndex' when calling saveTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'paragraphIndex' is set
+        if (paragraphIndex == null) {
+            throw new ApiException("Missing the required parameter 'paragraphIndex' when calling saveTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'format' is set
+        if (format == null) {
+            throw new ApiException("Missing the required parameter 'format' when calling saveTableCellParagraph(Async)");
+        }
+        // verify the required parameter 'outPath' is set
+        if (outPath == null) {
+            throw new ApiException("Missing the required parameter 'outPath' when calling saveTableCellParagraph(Async)");
+        }
+        Object postBody = null;
+
+        // create path and map variables
+        String methodPath = "/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/{format}"
+            .replaceAll("\\{" + "name" + "\\}", apiClient.objectToString(name)).replaceAll("\\{" + "slideIndex" + "\\}", apiClient.objectToString(slideIndex)).replaceAll("\\{" + "shapeIndex" + "\\}", apiClient.objectToString(shapeIndex)).replaceAll("\\{" + "rowIndex" + "\\}", apiClient.objectToString(rowIndex)).replaceAll("\\{" + "cellIndex" + "\\}", apiClient.objectToString(cellIndex)).replaceAll("\\{" + "paragraphIndex" + "\\}", apiClient.objectToString(paragraphIndex)).replaceAll("\\{" + "format" + "\\}", apiClient.objectToString(format));
+
+        List<Pair> queryParams = new ArrayList<Pair>();
+        apiClient.addQueryParameter(queryParams, "outPath", outPath);
+        apiClient.addQueryParameter(queryParams, "scaleX", scaleX);
+        apiClient.addQueryParameter(queryParams, "scaleY", scaleY);
+        apiClient.addQueryParameter(queryParams, "quality", quality);
+        apiClient.addQueryParameter(queryParams, "folder", folder);
+        apiClient.addQueryParameter(queryParams, "storage", storage);
+        apiClient.addQueryParameter(queryParams, "fontsFolder", fontsFolder);
+
+        Map<String, String> headerParams = new HashMap<String, String>();
+        if (password != null)
+        headerParams.put("password", apiClient.parameterToString(password));
+
+        Map<String, Object> formParams = new LinkedHashMap<String, Object>();
+
+        final String[] accepts = {
+            "application/json"
+        };
+        final String accept = apiClient.selectHeaderAccept(accepts);
+        if (accept != null) headerParams.put("Accept", accept);
+
+        final String[] contentTypes = {
+            "application/json"
+        };
+        final String contentType = apiClient.selectHeaderContentType(contentTypes);
+        headerParams.put("Content-Type", contentType);
+
+        if(progressListener != null) {
+            apiClient.getHttpClient().networkInterceptors().add(new com.squareup.okhttp.Interceptor() {
+                @Override
+                public com.squareup.okhttp.Response intercept(com.squareup.okhttp.Interceptor.Chain chain) throws IOException {
+                    com.squareup.okhttp.Response originalResponse = chain.proceed(chain.request());
+                    return originalResponse.newBuilder()
+                    .body(new ProgressResponseBody(originalResponse.body(), progressListener))
+                    .build();
+                }
+            });
+        }
+        return apiClient.buildCall(methodPath, "PUT", queryParams, postBody, headerParams, formParams, progressRequestListener);
+    }
+
+    /**
+     * Render table cell paragraph to specified picture format and save it to the storage.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public void saveTableCellParagraph(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder) throws ApiException {
+        try {
+            saveTableCellParagraphWithHttpInfo(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder);
+        } catch (NeedRepeatRequestException e) {
+            saveTableCellParagraphWithHttpInfo(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder);
+        }
+    }
+
+    /**
+     * Render table cell paragraph to specified picture format and save it to the storage.
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     */
+    public ApiResponse<Void> saveTableCellParagraphWithHttpInfo(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder) throws ApiException {
+        com.squareup.okhttp.Call call = saveTableCellParagraphCall(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder, null, null);
+        return apiClient.execute(call);
+    }
+
+    /**
+     * Render table cell paragraph to specified picture format and save it to the storage. (asynchronously)
+     * 
+     * @param name Document name. (required)
+     * @param slideIndex Slide index. (required)
+     * @param shapeIndex Shape index. (required)
+     * @param rowIndex Row index. (required)
+     * @param cellIndex Table cell index. (required)
+     * @param paragraphIndex Paragraph index. (required)
+     * @param format Export picture format. (required)
+     * @param outPath Output path. (required)
+     * @param scaleX X scale ratio. 
+     * @param scaleY Y scale ratio. 
+     * @param quality Image quality (1 to 100); applies to JPEG only. 
+     * @param password Document password. 
+     * @param folder Document folder. 
+     * @param storage Document storage. 
+     * @param fontsFolder Fonts folder. 
+     * @param callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     */
+    public com.squareup.okhttp.Call saveTableCellParagraphAsync(String name, Integer slideIndex, Integer shapeIndex, Integer rowIndex, Integer cellIndex, Integer paragraphIndex, ImageExportFormat format, String outPath, Double scaleX, Double scaleY, Integer quality, String password, String folder, String storage, String fontsFolder, final ApiCallback<Void> callback) throws ApiException {
+
+        ProgressResponseBody.ProgressListener progressListener = null;
+        ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
+
+        if (callback != null) {
+            progressListener = new ProgressResponseBody.ProgressListener() {
+                @Override
+                public void update(long bytesRead, long contentLength, boolean done) {
+                    callback.onDownloadProgress(bytesRead, contentLength, done);
+                }
+            };
+
+            progressRequestListener = new ProgressRequestBody.ProgressRequestListener() {
+                @Override
+                public void onRequestProgress(long bytesWritten, long contentLength, boolean done) {
+                    callback.onUploadProgress(bytesWritten, contentLength, done);
+                }
+            };
+        }
+
+        com.squareup.okhttp.Call call = saveTableCellParagraphCall(name, slideIndex, shapeIndex, rowIndex, cellIndex, paragraphIndex, format, outPath, scaleX, scaleY, quality, password, folder, storage, fontsFolder, progressListener, progressRequestListener);
         apiClient.executeAsync(call, callback);
         return call;
     }
